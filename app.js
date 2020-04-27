@@ -1,3 +1,4 @@
+
 var context;
 var shape = new Object();
 var board;
@@ -13,16 +14,7 @@ $(document).ready(function() {
 	Start();
 });
 
-function show_only_welcome() {
-	var e1 = document.getElementById("welcome");
-	e1.style.display = 'block';
-	var e2 = document.getElementById("register");
-	e2.style.display = 'none';
-	var e3 = document.getElementById("login");
-	e2.style.display = 'none';
-	var e4 = document.getElementById("singup");
-	e2.style.display = 'none';
-}
+
 
 function Start() {
 	board = new Array();
