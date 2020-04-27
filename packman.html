@@ -14,20 +14,19 @@
 
 	<body>
 		
-
-		<div id="score">
-			<label for="lblScore">SCORE:</label>
-			<input id="lblScore" type="text" />
-		</div>
-		<div id="time">
-			<label for="lblTime">TIME:</label>
-			<input id="lblTime" type="text" />
-		</div>
-
-		<div id="welcome" class="changedDivs" style="display: none">
-			<b>Welcom!</b>
+		<div id="menu">
+			<button id = "register_button" onclick="showOnlyWelcome()"> welcome </button>
 			<button id = "register_button" onclick="showOnlyRegister()"> register </button>
 			<button id = "login_button" onclick="showOnlyLogin()"> login </button>
+			<button id = "login_button" onclick="showOnlyAbout()"> about </button>
+			
+		</div>
+
+		<div id="welcome" class="changedDivs" style="display: none">			
+			<div style= "color: snow ; font-size: 100px; ">			
+				WELCOME BITCHES
+			</div>		
+			
 		</div>
 
 		<div id="register" class="changedDivs" style="display: none">
@@ -42,19 +41,24 @@
 
 		<div id="settings" class="changedDivs" style="display: none">
 			<b>settings!</b>
+			<button id = "game_button" onclick="showOnlyGame()"> play </button>
 		</div>
 
 		<div id="about" class="changedDivs" style="display: none">
 			<b>about!</b>
+
 		</div>
-
 		
-
-		
-
-
-		<div id="game">
-			<canvas id="canvas" class="changedDivs" style="display: none" height="600" width="600"></canvas>
+		<div id="game" style="display: none">
+			<div id="score">
+				<label for="lblScore">SCORE:</label>
+				<input id="lblScore" type="text" />
+			</div>
+			<div id="time">
+				<label for="lblTime">TIME:</label>
+				<input id="lblTime" type="text" />
+			</div>
+			<canvas id="canvas" class="changedDivs"  height="600" width="600"></canvas>
 		</div>
 	</body>
 </html>
