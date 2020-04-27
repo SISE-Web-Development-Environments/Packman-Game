@@ -1,64 +1,73 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="style.css" />
-		<script src="./jquery-3.4.1.slim.min.js"></script>			
-		<script type="text/javascript" src="./app.js"></script>
-		<script type="text/javascript" src="./welcome.js"></script>
-		<script type="text/javascript" src="./register.js"></script>
-		<script type="text/javascript" src="./login.js"></script>
-		<script type="text/javascript" src="./about.js"></script>
-		<script type="text/javascript" src="./settings.js"></script>
 
-	</head>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script src="./jquery-3.4.1.slim.min.js"></script>
+	<script type="text/javascript" src="./app.js"></script>
+	<script type="text/javascript" src="./welcome.js"></script>
+	<script type="text/javascript" src="./register.js"></script>
+	<script type="text/javascript" src="./login.js"></script>
+	<script type="text/javascript" src="./about.js"></script>
+	<script type="text/javascript" src="./settings.js"></script>
 
-	<body>
-		
-		<div id="menu">
-			<button id = "register_button" onclick="showOnlyWelcome()"> welcome </button>
-			<button id = "register_button" onclick="showOnlyRegister()"> register </button>
-			<button id = "login_button" onclick="showOnlyLogin()"> login </button>
-			<button id = "login_button" onclick="showOnlyAbout()"> about </button>
-			
+</head>
+
+<body>
+
+	<div id="menu">
+		<button id="register_button" onclick="showOnlyWelcome()"> welcome </button>
+		<button id="register_button" onclick="showOnlyRegister()"> register </button>
+		<button id="login_button" onclick="showOnlyLogin()"> login </button>
+		<button id="login_button" onclick="showOnlyAbout()"> about </button>
+
+	</div>
+
+	<div id="welcome" class="changedDivs" style="display: none">
+		<div style="color: rgb(215, 229, 182) ; text-align:right">בס"ד</div>
+		<div style="height: 40px;"></div>
+		<div style="color: rgb(215, 229, 182) ; font-size: 100px; text-align:center">
+			WELCOME BITCHES
+		</div>
+		<div style="height: 250px;"></div>
+		<div style=" text-align:center" >
+			<button  class="welcome_button"  onclick="showOnlyRegister()">SIGN UP</button>		
+			<button  class="welcome_button" onclick="showOnlyLogin()">LOG IN</button>
 		</div>
 
-		<div id="welcome" class="changedDivs" style="display: none">			
-			<div style= "color: snow ; font-size: 100px; ">			
-				WELCOME BITCHES
-			</div>		
-			
-		</div>
+	</div>
 
-		<div id="register" class="changedDivs" style="display: none">
-			<b>register!</b>
-			<button id = "setting_button1" onclick="showOnlySettings()"> settings </button>
-		</div>
+	<div id="register" class="changedDivs" style="display: none">
+		<b>register!</b>
+		<button id="setting_button1" onclick="showOnlySettings()"> settings </button>
+	</div>
 
-		<div id="login" class="changedDivs" style="display: none">
-			<b>login!</b>
-			<button id = "setting_button2" onclick="showOnlySettings()"> settings </button>
-		</div>
+	<div id="login" class="changedDivs" style="display: none">
+		<b>login!</b>
+		<button id="setting_button2" onclick="showOnlySettings()"> settings </button>
+	</div>
 
-		<div id="settings" class="changedDivs" style="display: none">
-			<b>settings!</b>
-			<button id = "game_button" onclick="showOnlyGame()"> play </button>
-		</div>
+	<div id="settings" class="changedDivs" style="display: none">
+		<b>settings!</b>
+		<button id="game_button" onclick="showOnlyGame()"> play </button>
+	</div>
 
-		<div id="about" class="changedDivs" style="display: none">
-			<b>about!</b>
+	<div id="about" class="changedDivs" style="display: none">
+		<b>about!</b>
 
+	</div>
+
+	<div id="game" style="display: none">
+		<div id="score">
+			<label for="lblScore">SCORE:</label>
+			<input id="lblScore" type="text" />
 		</div>
-		
-		<div id="game" style="display: none">
-			<div id="score">
-				<label for="lblScore">SCORE:</label>
-				<input id="lblScore" type="text" />
-			</div>
-			<div id="time">
-				<label for="lblTime">TIME:</label>
-				<input id="lblTime" type="text" />
-			</div>
-			<canvas id="canvas" class="changedDivs"  height="600" width="600"></canvas>
+		<div id="time">
+			<label for="lblTime">TIME:</label>
+			<input id="lblTime" type="text" />
 		</div>
-	</body>
+		<canvas id="canvas" class="changedDivs" height="600" width="600"></canvas>
+	</div>
+</body>
+
 </html>

@@ -11,4 +11,6 @@ function showOnlyRegister() {
 	e5.style.display = 'none';
 	var e6 = document.getElementById("game");
 	e6.style.display = 'none';
+	var e7 = document.getElementById("menu");
+	e7.style.display = 'block';
 }
