@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<script src="./jquery-3.4.1.slim.min.js"></script>			
+		<script type="text/javascript" src="./app.js"></script>
+		<script type="text/javascript" src="./welcome.js"></script>
+		<script type="text/javascript" src="./register.js"></script>
+		<script type="text/javascript" src="./login.js"></script>
+		<script type="text/javascript" src="./about.js"></script>
+		<script type="text/javascript" src="./settings.js"></script>
+
+	</head>
+
+	<body>
+		
+
+		<div id="score">
+			<label for="lblScore">SCORE:</label>
+			<input id="lblScore" type="text" />
+		</div>
+		<div id="time">
+			<label for="lblTime">TIME:</label>
+			<input id="lblTime" type="text" />
+		</div>
+
+		<div id="welcome" class="changedDivs" style="display: none">
+			<b>Welcom!</b>
+			<button id = "register_button" onclick="showOnlyRegister()"> register </button>
+			<button id = "login_button" onclick="showOnlyLogin()"> login </button>
+		</div>
+
+		<div id="register" class="changedDivs" style="display: none">
+			<b>register!</b>
+			<button id = "setting_button1" onclick="showOnlySettings()"> settings </button>
+		</div>
+
+		<div id="login" class="changedDivs" style="display: none">
+			<b>login!</b>
+			<button id = "setting_button2" onclick="showOnlySettings()"> settings </button>
+		</div>
+
+		<div id="settings" class="changedDivs" style="display: none">
+			<b>settings!</b>
+		</div>
+
+		<div id="about" class="changedDivs" style="display: none">
+			<b>about!</b>
+		</div>
+
+		
+
+		
+
+
+		<div id="game">
+			<canvas id="canvas" class="changedDivs" style="display: none" height="600" width="600"></canvas>
+		</div>
+	</body>
+</html>

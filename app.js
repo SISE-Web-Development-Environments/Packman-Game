@@ -9,10 +9,10 @@ var time_elapsed;
 var interval;
 var roi;
 
-$(document).ready(function() {
-	context = canvas.getContext("2d");
-	Start();
-});
+// $(document).ready(function() {
+// 	context = canvas.getContext("2d");
+// 	Start();
+// });
 
 
 

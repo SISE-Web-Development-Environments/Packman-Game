@@ -1,4 +1,30 @@
+.changedDivs {    
+    width:  600px;
+    height:  600px;
+}
+
 #welcome
 {
-    background-color:transparent;/* change! */
+    background-color:skyblue
 }
+
+#register
+{
+    background-color:gold
+}
+
+#login
+{
+    background-color:salmon
+}
+
+#about
+{
+    background-color:yellowgreen
+}
+
+#settings
+{
+    background-color:mediumslateblue
+}
+
