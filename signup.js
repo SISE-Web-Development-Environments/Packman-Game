@@ -1,4 +1,6 @@
-
+function clearLocalStorage(){
+	localStorage.clear();
+}
  
 
 function showOnlySignup() {
@@ -24,5 +26,14 @@ function submit()
 	  var Email = document.getElementById("Email");
 	  var birth_date = document.getElementById("birth_date");
 	  var details = [password.value, full_name.value, Email.value, (birth_date.value).toString()]
-      localStorage.setItem( user_name.value, JSON.stringify(details));      
-   }   
+	 
+	  localStorage.setItem(user_name.value, JSON.stringify(details));      
+   }
+   
+   function test() 
+   {
+	var user_name = document.getElementById("user_name");  
+	var retrievedData = localStorage.getItem(user_name.value); 
+	var details2 =  JSON.parse(retrievedData);
+	p1.innerText = details2[0];
+   }
