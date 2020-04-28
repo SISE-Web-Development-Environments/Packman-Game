@@ -6,7 +6,7 @@ $(document).ready(function() {
 function showOnlyWelcome() {
 	var e1 = document.getElementById("welcome");
 	e1.style.display = 'block';
-	var e2 = document.getElementById("register");
+	var e2 = document.getElementById("signup");
 	e2.style.display = 'none';
 	var e3 = document.getElementById("login");
 	e3.style.display = 'none';
