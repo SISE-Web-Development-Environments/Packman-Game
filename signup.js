@@ -1,3 +1,6 @@
+
+ 
+
 function showOnlySignup() {
 	var e1 = document.getElementById("welcome");
 	e1.style.display = 'none';
@@ -11,6 +14,15 @@ function showOnlySignup() {
 	e5.style.display = 'none';
 	var e6 = document.getElementById("game");
 	e6.style.display = 'none';
-	var e7 = document.getElementById("menu");
-	e7.style.display = 'block';
 }
+
+function submit() 
+   {
+      var user_name = document.getElementById("user_name");
+      var password = document.getElementById("password");
+      var full_name = document.getElementById("full_name");
+	  var Email = document.getElementById("Email");
+	  var birth_date = document.getElementById("birth_date");
+	  var details = [password.value, full_name.value, Email.value, (birth_date.value).toString()]
+      localStorage.setItem( user_name.value, JSON.stringify(details));      
+   }   
