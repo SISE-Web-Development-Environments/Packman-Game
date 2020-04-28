@@ -15,92 +15,98 @@
 
 <body>
 
-	<div id="menu">
+	<header>HEADER</header>
+
+	<!-- MENU -->
+	<menu id="menu">
 		<button id="welcome_button" onclick="showOnlyWelcome()"> welcome </button>
 		<button id="signup_button" onclick="showOnlySignup()"> signup </button>
 		<button id="login_button" onclick="showOnlyLogin()"> login </button>
 		<button id="about_button" onclick="showOnlyAbout()"> about </button>
 
-	</div>
+	</menu>
 
-	<!-- WELCOME -->
-	<div id="welcome" class="changedDivs" style="display: none">
-		<div style="color: rgb(215, 229, 182) ; text-align:right">בס"ד</div>
-		<div style="height: 40px;"></div>
-		<div style="color: rgb(215, 229, 182) ; font-size: 100px; text-align:center">
-			WELCOME BITCHES
+	<content>
+		<!-- WELCOME -->
+		<div id="welcome" class="changedDivs" style="display: none">
+			<div style="color: rgb(215, 229, 182) ; text-align:right">בס"ד</div>
+			<div style="height: 40px;"></div>
+			<div style="color: rgb(215, 229, 182) ; font-size: 100px; text-align:center">
+				WELCOME BITCHES
+			</div>
+			<div style="height: 250px;"></div>
+			<div style=" text-align:center">
+				<button class="welcome_button" onclick="showOnlySignup()">SIGN UP</button>
+				<button class="welcome_button" onclick="showOnlyLogin()">LOG IN</button>
+			</div>
+		
 		</div>
-		<div style="height: 250px;"></div>
-		<div style=" text-align:center">
-			<button class="welcome_button" onclick="showOnlySignup()">SIGN UP</button>
-			<button class="welcome_button" onclick="showOnlyLogin()">LOG IN</button>
+		
+		<!-- SIGNUP -->
+		<div id="signup" class="changedDivs" style="display: none">
+			<b>signup!</b>
+			<div>
+				<label for="user_name">User Name:</label>
+				<input type="text" id="user_name" />
+			</div>
+			<div>
+				<label for="password">Password:</label>
+				<input type="text" id="password" />
+			</div>
+			<div>
+				<label for="full_name">Full Name:</label>
+				<input type="text" id="full_name" />
+			</div>
+			<div>
+				<label for="Email">Email:</label>
+				<input type="text" id="Email" />
+			</div>
+		
+			<label for="birth_date">Birth date:</label>
+		
+			<div>
+				<input type="date" id="birth_date"  value="2018-07-22" min="1930-01-01" max="2014-12-31">
+			</div>
+		
+			<div>
+				<button id="submit_button" onclick="submit()"> Submit </button>
+			</div>
+		
+			<button id="setting_button1" onclick="showOnlySettings()"> settings </button>
 		</div>
-
-	</div>
-
-	<!-- SIGNUP -->
-	<div id="signup" class="changedDivs" style="display: none">
-		<b>signup!</b>
-		<div>
-			<label for="user_name">User Name:</label>
-			<input type="text" id="user_name" />
+		
+		<!-- LOGIN -->
+		<div id="login" class="changedDivs" style="display: none">
+			<b>login!</b>
+			<button id="setting_button2" onclick="showOnlySettings()"> settings </button>
 		</div>
-		<div>
-			<label for="password">Password:</label>
-			<input type="text" id="password" />
+		
+		<!-- SETTING -->
+		<div id="settings" class="changedDivs" style="display: none">
+			<b>settings!</b>
+			<button id="game_button" onclick="showOnlyGame()"> play </button>
 		</div>
-		<div>
-			<label for="full_name">Full Name:</label>
-			<input type="text" id="full_name" />
+		
+		<!-- ABOUT -->
+		<div id="about" class="changedDivs" style="display: none">
+			<b>about!</b>
+		
 		</div>
-		<div>
-			<label for="Email">Email:</label>
-			<input type="text" id="Email" />
+		
+		<!-- GAME -->
+		<div id="game" style="display: none">
+			<div id="score">
+				<label for="lblScore">SCORE:</label>
+				<input id="lblScore" type="text" />
+			</div>
+			<div id="time">
+				<label for="lblTime">TIME:</label>
+				<input id="lblTime" type="text" />
+			</div>
+			<canvas id="canvas" class="changedDivs" height="600" width="600"></canvas>
 		</div>
-
-		<label for="birth_date">Birth date:</label>
-
-		<div>
-			<input type="date" id="birth_date"  value="2018-07-22" min="1930-01-01" max="2014-12-31">
-		</div>
-
-		<div>
-			<button id="submit_button" onclick="submit()"> Submit </button>
-		</div>
-
-		<button id="setting_button1" onclick="showOnlySettings()"> settings </button>
-	</div>
-
-	<!-- LOGIN -->
-	<div id="login" class="changedDivs" style="display: none">
-		<b>login!</b>
-		<button id="setting_button2" onclick="showOnlySettings()"> settings </button>
-	</div>
-
-	<!-- SETTING -->
-	<div id="settings" class="changedDivs" style="display: none">
-		<b>settings!</b>
-		<button id="game_button" onclick="showOnlyGame()"> play </button>
-	</div>
-
-	<!-- ABOUT -->
-	<div id="about" class="changedDivs" style="display: none">
-		<b>about!</b>
-
-	</div>
-
-	<!-- GAME -->
-	<div id="game" style="display: none">
-		<div id="score">
-			<label for="lblScore">SCORE:</label>
-			<input id="lblScore" type="text" />
-		</div>
-		<div id="time">
-			<label for="lblTime">TIME:</label>
-			<input id="lblTime" type="text" />
-		</div>
-		<canvas id="canvas" class="changedDivs" height="600" width="600"></canvas>
-	</div>
+	</content>
+	<footer>FOOTER</footer>
 </body>
 
 </html>

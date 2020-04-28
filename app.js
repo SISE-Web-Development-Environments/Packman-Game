@@ -25,9 +25,7 @@ function showOnlyGame() {
 	var e5 = document.getElementById("settings");
 	e5.style.display = 'none';
 	var e6 = document.getElementById("game");
-	e6.style.display = 'block';
-	var e7 = document.getElementById("menu");
-	e7.style.display = 'block';
+	e6.style.display = 'block';	
 	context = canvas.getContext("2d");
  	Start();
 }
