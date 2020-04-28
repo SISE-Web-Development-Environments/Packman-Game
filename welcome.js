@@ -19,3 +19,5 @@ function showOnlyWelcome() {
 	var e7 = document.getElementById("menu");
 	e7.style.display = 'none';
 }
+
+// ffff
