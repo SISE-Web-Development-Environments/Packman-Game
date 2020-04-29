@@ -13,3 +13,64 @@ function showOnlySettings() {
 	e6.style.display = 'none';
 	
 }
+ function setKeyUp(event){
+	var key_up = event.keyCode;
+    sessionStorage.setItem("key_up", key_up);
+	alert("up button select");
+ } 
+ function setKeyDown(event){
+	var key_down = event.keyCode;
+	sessionStorage.setItem("key_down", key_down);
+  	alert("down button select");
+ } 
+ function setKeyLeft(event){
+	var key_left = event.keyCode;
+	sessionStorage.setItem("key_left", key_left);
+  	alert("left button select");
+ } 
+ function setKeyRight(event){
+	var key_right = event.keyCode;
+	sessionStorage.setItem("key_right", key_right);
+  	alert("right button select");
+ } 
+ function saveSettings(){
+	 var balls_amount = document.getElementById("balls_amount").value ;
+	 var low_points_balls_color = document.getElementById("low_points_balls_color").value;
+	 var medium_points_balls_color = document.getElementById("medium_points_balls_color").value;
+	 var high_points_balls_color = document.getElementById("high_points_balls_color").value;
+	 var game_duration = document.getElementById("game_duration").value;
+	 var n_monsters = document.getElementById("n_monsters").value;
+
+	 sessionStorage.setItem("balls_amount", balls_amount);
+	 sessionStorage.setItem("low_points_balls_color", low_points_balls_color);
+	 sessionStorage.setItem("medium_points_balls_color", medium_points_balls_color);
+	 sessionStorage.setItem("high_points_balls_color", high_points_balls_color);
+	 sessionStorage.setItem("game_duration", game_duration);
+	 sessionStorage.setItem("n_monsters", n_monsters);
+	 
+	 //TODO: save settings in local storage
+ }
+ function randomSettings(){
+	document.getElementById("balls_amount").innerHTML = 60;
+	document.getElementById("low_points_balls_color").innerHTML = "#00cc00";
+	document.getElementById("medium_points_balls_color").innerHTML ="#0066ff";
+	document.getElementById("high_points_balls_color").innerHTML = "#ff0000";
+	document.getElementById("game_duration").innerHTML = 60;
+	document.getElementById("n_monsters").innerHTML = 2;
+
+	sessionStorage.setItem("key_up", 38);
+	sessionStorage.setItem("key_down", 40);
+	sessionStorage.setItem("key_left", 37);
+	sessionStorage.setItem("key_right", 39);
+ }
+ function displaySettings(){
+	alert("balls amount: "+ sessionStorage.getItem("balls_amount") + "\n" +
+			"balls colors: " + sessionStorage.getItem("low_points_balls_color") +" "+ sessionStorage.getItem("medium_points_balls_color")
+			+" "+ sessionStorage.getItem("high_points_balls_color") +"\n"+
+			"game duration: "+ sessionStorage.getItem("game_duration") + "\n" +
+			"monsters amount: "+ sessionStorage.getItem("n_monsters")+"\n"+
+			"keys: "+"UP: "+ sessionStorage.getItem("key_up")+ " "
+			+"DOWN: "+ sessionStorage.getItem("key_down")+ " "
+			+"LEFT: "+ sessionStorage.getItem("key_left")+ " "
+			+"RIGHT: "+ sessionStorage.getItem("key_right"));
+ }
