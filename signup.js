@@ -27,6 +27,7 @@ function submit()
 	  var birth_date = document.getElementById("birth_date");
 	  var details = [password.value, full_name.value, Email.value, (birth_date.value).toString()]
 	 
+	  sessionStorage.setItem("user_name", user_name)
 	  localStorage.setItem(user_name.value, JSON.stringify(details));      
    }
    

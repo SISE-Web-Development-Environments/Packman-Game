@@ -49,6 +49,8 @@ function showOnlySettings() {
 	 sessionStorage.setItem("n_monsters", n_monsters);
 	 
 	 //TODO: save settings in local storage
+	 var details = [password.value, full_name.value, Email.value, (birth_date.value).toString()]
+	var user_name = sessionStorage.getItem("user_name")	
  }
  function randomSettings(){
 	document.getElementById("balls_amount").innerHTML = 60;
