@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	showOnlyWelcome();
+	createUserP();
 });
 
 function showOnlyWelcome() {
@@ -18,5 +19,11 @@ function showOnlyWelcome() {
 	e6.style.display = 'none';	
 }
 
-// ffff
-// hhhh
+function createUserP() {	
+	if(localStorage.getItem("p")==null){
+		var details = ["p", "p levy", "p.com", "01.01.1994"]
+		localStorage.setItem("p", JSON.stringify(details));
+	}
+}
+
+

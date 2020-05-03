@@ -4,6 +4,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script src="./jquery-3.4.1.slim.min.js"></script>
+	
 	<script type="text/javascript" src="./app.js"></script>
 	<script type="text/javascript" src="./welcome.js"></script>
 	<script type="text/javascript" src="./signup.js"></script>
@@ -48,39 +49,33 @@
 
 		<!-- SIGNUP -->
 		<div id="signup" class="changedDivs" style="display: none">
-			<b>signup!</b>
 			<div>
 				<label for="user_name">User Name:</label>
-				<input type="text" id="user_name" />
+				<input type="text" id="user_name" name="user_name" />
 			</div>
 			<div>
 				<label for="password">Password:</label>
-				<input type="text" id="password" />
+				<input type="password" id="password" name="password" />
 			</div>
 			<div>
 				<label for="full_name">Full Name:</label>
-				<input type="text" id="full_name" />
+				<input type="text" id="full_name" name="full_name" />
 			</div>
 			<div>
 				<label for="Email">Email:</label>
-				<input type="text" id="Email" />
+				<input type="email" id="Email" name="Email" />
 			</div>
 
-			<label for="birth_date">Birth date:</label>
-
 			<div>
+				<label for="birth_date">Birth date:</label>
 				<input type="date" id="birth_date" value="1994-01-01" min="1930-01-01" max="2020-01-01">
 			</div>
 
-			<div>
-				<button id="submit_button" onclick="submit()"> Submit </button>
-			</div>
+			<button id="submit_button" onclick="submit()"> submit </button>
+			<p id="success" style="font-size: 50px"> Fill details before you continue </p>
 
-			<input type=button onclick="test()" value="Click Me">
+			<button id="setting_button" onclick="showOnlySettings()"> settings </button>
 
-			<p id="p1"></p>
-
-			<button id="setting_button1" onclick="showOnlySettings()"> settings </button>
 		</div>
 
 		<!-- LOGIN -->
@@ -104,10 +99,10 @@
 				<b>You can choose game buttons by defult:</b>
 				<button id="random_settings" onclick="randomSettings()"> Random </button>
 			</div>
-			<br/>
+			<br />
 			<div>
 				<b>You can choose game buttons by yourself:</b>
-				
+
 				<div>
 					<label for="key_up">UP:</label>
 					<input type="text" onkeydown="setKeyUp(event)" id="key_up">
@@ -125,7 +120,7 @@
 					<input type="text" onkeydown="setKeyRight(event)" id="key_right">
 				</div>
 			</div>
-			<br/>
+			<br />
 			<div>
 				<b>Choose number of balls:</b>
 				<div>
@@ -133,7 +128,7 @@
 					<input type="number" id="balls_amount" name="balls_amount" min="50" max="90" value="60">
 				</div>
 			</div>
-			<br/>
+			<br />
 			<div>
 				<b>Choose balls colors:</b>
 				<div>
@@ -149,26 +144,26 @@
 					<input type="color" id="high_points_balls_color" value="#ff0000">
 				</div>
 			</div>
-			<br/>
+			<br />
 			<div>
 				<b>Coose game duration:</b>
 				<div>
 					<label for="game_duration">time in seconds: (up than 60)</label>
-					<input type="number" id="game_duration" min="60" value="60" >
+					<input type="number" id="game_duration" min="60" value="60">
 				</div>
 			</div>
 			<div>
 				<b>Coose monsters amount:</b>
 				<div>
 					<label for="n_monsters">number between 1 to 4</label>
-					<input type="number" id="n_monsters" min="1" max="4" value="2" >
+					<input type="number" id="n_monsters" min="1" max="4" value="2">
 				</div>
 			</div>
-			<br/>
+			<br />
 			<div>
 				<button id="save_settings_button" onclick="saveSettings()"> Save </button>
-				
-				
+
+
 			</div>
 			<div>
 				<button id="display_settings" onclick="displaySettings()"> display settings </button>
@@ -184,15 +179,22 @@
 
 		<!-- GAME -->
 		<div id="game" style="display: none">
-			<div id="score">
-				<label for="lblScore">SCORE:</label>
-				<input id="lblScore" type="text" />
-			</div>
-			<div id="time">
-				<label for="lblTime">TIME:</label>
-				<input id="lblTime" type="text" />
+			<div>
+				<div id="score">
+					<label for="lblScore">SCORE:</label>
+					<input id="lblScore" type="text" />
+				</div>
+				<div id="time">
+					<label for="lblTime">TIME REMAIN:</label>
+					<input id="lblTime" type="text" />
+				</div>
+				<div id="user_name_player">
+					<label for="lblUserName">PACMAN NAME:</label>
+					<input id="lblUserName" type="text" />
+				</div>
 			</div>
 			<canvas id="canvas" class="changedDivs" height="600" width="600"></canvas>
+			<button id="game_button" onclick="showOnlyGame()"> New game </button>
 		</div>
 	</content>
 	<footer>FOOTER</footer>

@@ -32,7 +32,19 @@ function login_start(){
 				alert("welcome "+user_name.value);
 				showOnlyGame();
 				//TODO: set settings and start the game
-				
+				var retrievedSettings = localStorage.getItem(user_name.value+"_settings"); 
+				var settings =  JSON.parse(retrievedSettings);
+				sessionStorage.setItem("balls_amount", settings[0]);
+				sessionStorage.setItem("low_points_balls_color", settings[1]);
+				sessionStorage.setItem("medium_points_balls_color", settings[2]);
+				sessionStorage.setItem("high_points_balls_color", settings[3]);
+				sessionStorage.setItem("game_duration", settings[4]);
+				sessionStorage.setItem("n_monsters", settings[5]);
+
+				sessionStorage.setItem("key_up", settings[6]);
+				sessionStorage.setItem("key_down", settings[7]);
+				sessionStorage.setItem("key_left", settings[8]);
+				sessionStorage.setItem("key_right", settings[9]);
 			}
 			else{
 				alert("The password you’ve entered is incorrect")

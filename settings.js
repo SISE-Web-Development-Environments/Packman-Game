@@ -10,9 +10,9 @@ function showOnlySettings() {
 	var e5 = document.getElementById("settings");
 	e5.style.display = 'block';
 	var e6 = document.getElementById("game");
-	e6.style.display = 'none';
-	
+	e6.style.display = 'none';	
 }
+
  function setKeyUp(event){
 	var key_up = event.keyCode;
     sessionStorage.setItem("key_up", key_up);
@@ -48,9 +48,17 @@ function showOnlySettings() {
 	 sessionStorage.setItem("game_duration", game_duration);
 	 sessionStorage.setItem("n_monsters", n_monsters);
 	 
-	 //TODO: save settings in local storage
-	 var details = [password.value, full_name.value, Email.value, (birth_date.value).toString()]
-	var user_name = sessionStorage.getItem("user_name")	
+	 //save settings in local storage
+	 var key_up = sessionStorage.getItem("key_up");
+	 var key_down =sessionStorage.getItem("key_down");
+	 var key_left =sessionStorage.getItem("key_left");
+	 var key_right =sessionStorage.getItem("key_right");
+
+
+	 var details = [balls_amount, low_points_balls_color, medium_points_balls_color, high_points_balls_color, game_duration, n_monsters, key_up, key_down, key_left, key_right];
+	 var user_name = sessionStorage.getItem("signup_user_name");
+	 localStorage.setItem(user_name+"_settings", JSON.stringify(details));	
+	 sessionStorage.setItem("user_name", user_name);	
  }
  function randomSettings(){
 	document.getElementById("balls_amount").innerHTML = 60;
