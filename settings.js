@@ -10,9 +10,9 @@ function showOnlySettings() {
 	var e5 = document.getElementById("settings");
 	e5.style.display = 'block';
 	var e6 = document.getElementById("game");
-	e6.style.display = 'none';
-	
+	e6.style.display = 'none';	
 }
+
  function setKeyUp(event){
 	var key_up = event.keyCode;
     sessionStorage.setItem("key_up", key_up);
