@@ -10,6 +10,10 @@ var time_elapsed;
 var interval;
 var interval2;
 let pac = new Image();
+let white_monster = new Image();
+let pink_monster = new Image();
+let grey_monster = new Image();
+let funny_monster = new Image();
 let pacPosition;
 
 // $(document).ready(function() {
@@ -52,8 +56,8 @@ function Start() {
 		m_board[i] = new Array();
 		for (var j = 0; j < 12; j++) {
 			//monsters
-			n_monsters = sessionStorage.getItem("n_monsters");//string or int?
-			//n_monsters = 3;
+			//n_monsters = sessionStorage.getItem("n_monsters");//string or int?
+			n_monsters = 4;
 			if (i == 1 && j == 1) {
 				monstersLocations = new Array();
 				monstersLocations[0] = new Array();
@@ -335,6 +339,11 @@ function Draw() {
 }
 
 function DrawMonsters() {
+	pink_monster.src = "resource\\pink_monster.png";
+	white_monster.src = "resource\\white_monster.png";
+	grey_monster.src = "resource\\grey_monster.png";
+	funny_monster.src = "resource\\funny_monster.png";
+
 	for (var i = 0; i < 22; i++) { //clean board
 		for (var j = 0; j < 12; j++) {
 
@@ -344,28 +353,20 @@ function DrawMonsters() {
 			//canvas.width = canvas.width;
 
 			if (m_board[i][j] == 3.1) {
-				context.beginPath();
-				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
-				context.fillStyle = "pink"; //color
-				context.fill();
+			
+				context.drawImage(pink_monster, center.x - 15, center.y - 15);
 			}
 			else if (m_board[i][j] == 3.2) {
-				context.beginPath();
-				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
-				context.fillStyle = "pink"; //color
-				context.fill();
+			
+				context.drawImage(white_monster, center.x - 15, center.y - 15);
 			}
 			else if (m_board[i][j] == 3.3) {
-				context.beginPath();
-				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
-				context.fillStyle = "pink"; //color
-				context.fill();
+				
+				context.drawImage(grey_monster, center.x - 15, center.y - 15);
 			}
 			else if (m_board[i][j] == 3.4) {
-				context.beginPath();
-				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
-				context.fillStyle = "pink"; //color
-				context.fill();
+				
+				context.drawImage(funny_monster, center.x - 15, center.y - 15);
 			}
 		}
 	}
@@ -432,7 +433,7 @@ function UpdatePosition() {
 }
 
 function UpdateMonstersPosition() {
-	var k = Math.random();	
+	var coin = Math.random();	
 	let x = shape.i;
 	let y = shape.j;
 	let m1;
@@ -440,38 +441,42 @@ function UpdateMonstersPosition() {
 	for (var i = 0; i < n_monsters; i++) {
 		m1 = monstersLocations[i][0]
 		m2 = monstersLocations[i][1]
-		if (k > 0.6 && k >= 0.92) {				//move up or down
+		if (coin > 0.5 ) {				//move up or down
 			if (y - m2 < 0) {		//means: pacman is higher than monster
-				if (m2 > 0 && board[m1][m2 - 1] != 4.1 && board[m1][m2 - 1] != 4.2) {
+				if (m2 > 0 && board[m1][m2 - 1] != 4.1 && board[m1][m2 - 1] != 4.2 && m_board[m1][m2 - 1]==0) {
 					monstersLocations[i][1]--;
+					let type = m_board[m1][m2];
 					m_board[m1][m2] = 0;
-					m_board[m1][m2 - 1] = 3.1;
+					m_board[m1][m2 - 1] = type;
 				}
 
 			}
 			else {
-				if (m2 < 11 && board[m1][m2 + 1] != 4.1 && board[m1][m2 + 1] != 4.2) {
+				if (m2 < 11 && board[m1][m2 + 1] != 4.1 && board[m1][m2 + 1] != 4.2 && m_board[m1][m2 + 1]==0) {
 					monstersLocations[i][1]++;
+					let type = m_board[m1][m2];
 					m_board[m1][m2] = 0;
-					m_board[m1][m2 + 1] = 3.2;
+					m_board[m1][m2 + 1] = type;
 				}
 			}
 		}
 
-		if (k <= 0.6) {	 			// moved left or right
+		if (coin <= 0.5) {	 			// moved left or right
 			if (x - m1 < 0) {		//means: pacman is lefter than monster
-				if (m1 > 0 && board[m1 - 1][m2] != 4.1 && board[m1 - 1][m2] != 4.2) {
+				if (m1 > 0 && board[m1 - 1][m2] != 4.1 && board[m1 - 1][m2] != 4.2 && m_board[m1 - 1][m2]==0) {
 					monstersLocations[i][0]--;
+					let type = m_board[m1][m2];
 					m_board[m1][m2] = 0;
-					m_board[m1 - 1][m2] = 3.3;
+					m_board[m1 - 1][m2] = type;
 				}
 
 			}
 			else {
-				if (m1 < 21 && board[m1 + 1][m2] != 4.1 && board[m1 + 1][m2] != 4.2) {
+				if (m1 < 21 && board[m1 + 1][m2] != 4.1 && board[m1 + 1][m2] != 4.2 && m_board[m1 + 1][m2]==0) {
 					monstersLocations[i][0]++;
+					let type = m_board[m1][m2];
 					m_board[m1][m2] = 0;
-					m_board[m1 + 1][m2] = 3.4;
+					m_board[m1 + 1][m2] = type;
 				}
 			}
 		}
