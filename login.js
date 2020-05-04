@@ -30,7 +30,7 @@ function login_start(){
 			password.innerText = details[0];
 			if (password.innerText==password_in.value){
 				alert("welcome "+user_name.value);
-				showOnlyGame();
+				
 				//TODO: set settings and start the game
 				var retrievedSettings = localStorage.getItem(user_name.value+"_settings"); 
 				var settings =  JSON.parse(retrievedSettings);
@@ -45,6 +45,7 @@ function login_start(){
 				sessionStorage.setItem("key_down", settings[7]);
 				sessionStorage.setItem("key_left", settings[8]);
 				sessionStorage.setItem("key_right", settings[9]);
+				showOnlyGame();
 			}
 			else{
 				alert("The password you’ve entered is incorrect")

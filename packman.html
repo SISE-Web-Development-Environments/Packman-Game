@@ -178,23 +178,23 @@
 		</div>
 
 		<!-- GAME -->
-		<div id="game" style="display: none">
-			<div>
-				<div id="score">
-					<label for="lblScore">SCORE:</label>
-					<input id="lblScore" type="text" />
-				</div>
-				<div id="time">
-					<label for="lblTime">TIME REMAIN:</label>
-					<input id="lblTime" type="text" />
-				</div>
-				<div id="user_name_player">
-					<label for="lblUserName">PACMAN NAME:</label>
-					<input id="lblUserName" type="text" />
-				</div>
+		<div id="game" class="changedDivs" style="display: none">
+			<div id="score">
+				<label for="lblScore" style="color: white;">SCORE:</label>
+				<input id="lblScore" type="text" />
 			</div>
-			<canvas id="canvas" class="changedDivs" height="600" width="600"></canvas>
+			<div id="time">
+				<label for="lblTime" style="color: white;">TIME REMAIN:</label>
+				<input id="lblTime" type="text" />
+			</div>
+			<div id="user_name_player">
+				<label for="lblUserName" style="color: white;">PACMAN NAME:</label>
+				<input id="lblUserName" type="text" />
+			</div>
+			<canvas id="canvas" class="changedDivs" height="750" width="1350"></canvas>
 			<button id="game_button" onclick="showOnlyGame()"> New game </button>
+			<button id="setting_button" onclick="showOnlySettings()"> settings </button>
+
 		</div>
 	</content>
 	<footer>FOOTER</footer>

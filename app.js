@@ -36,7 +36,7 @@ function Start() {
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
-	var cnt = 100;
+	var cnt = 22*12;
 	var food_remain = sessionStorage.getItem("balls_amount");
 	var low_points_balls_remain = food_remain * 0.6;
 	var medium_points_balls_remain = food_remain * 0.3;
@@ -44,22 +44,97 @@ function Start() {
 	var pacman_state = false;
 	pacPosition = "R";
 	start_time = new Date();
-	for (var i = 0; i < 10; i++) {
+	for (var i = 0; i < 22; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-		for (var j = 0; j < 10; j++) {
-			if (
+		for (var j = 0; j < 12; j++) {
+			if (i == 21 || j == 11 || i==0 || j==0){
+				board[i][j] = 4.1;
+			}
+			else if (
 				
-				//walls
-				(i == 3 && j == 3) ||
-				(i == 3 && j == 4) ||
-				(i == 3 && j == 5) ||
-				(i == 6 && j == 1) ||
-				(i == 6 && j == 2)
+				// walls
+
+			 // i = col . j = row
+			 //R
+				(i == 2 && j == 2) ||
+				(i == 2 && j == 3) ||
+				(i == 2 && j == 4) ||
+				(i == 2 && j == 5) ||
+				(i == 2 && j == 6) ||
+				(i == 2 && j == 7) ||
+				(i == 2 && j == 8) ||
+				(i == 2 && j == 9) ||
+				(i == 3 && j == 2) ||
+				(i == 4 && j == 2) ||
+				(i == 5 && j == 2) ||
+				(i == 6 && j == 2) ||
+				(i == 7 && j == 2) ||
+				(i == 8 && j == 2) ||
+				(i == 8 && j == 3) ||
+				(i == 8 && j == 4) || 
+				(i == 8 && j == 4) || 
+				(i == 7 && j == 6) ||
+				(i == 6 && j == 6) ||
+				(i == 5 && j == 6) ||
+				(i == 4 && j == 6) ||
+				(i == 8 && j == 5) ||
+				(i == 8 && j == 6) ||
+				(i == 8 && j == 7) ||
+				(i == 8 && j == 8) ||
+				(i == 8 && j == 9) ||
+				//M
+				(i == 19 && j == 2) ||
+				(i == 19 && j == 3) ||
+				(i == 19 && j == 4) ||
+				(i == 19 && j == 5) ||
+				(i == 19 && j == 6) ||
+				(i == 19 && j == 7) ||
+				(i == 19 && j == 8) ||
+				(i == 19 && j == 9) ||
+				(i == 18 && j == 2) ||
+				(i == 17 && j == 2) ||
+				(i == 16 && j == 2) ||
+				(i == 15 && j == 2) ||
+				(i == 14 && j == 2) ||
+				(i == 13 && j == 2) ||
+				(i == 12 && j == 2) ||
+				(i == 11 && j == 2) ||
+				(i == 11 && j == 3) ||
+				(i == 11 && j == 4) ||
+				(i == 11 && j == 5) ||
+				(i == 11 && j == 6) ||
+				(i == 11 && j == 7) ||
+				(i == 11 && j == 8) ||
+				(i == 11 && j == 9) ||
+				(i == 15 && j == 3) ||
+				(i == 15 && j == 4) ||
+				(i == 15 && j == 5) ||
+				(i == 15 && j == 6) ||
+				(i == 15 && j == 7) ||
+				(i == 15 && j == 8) ||
+				(i == 15 && j == 9) 
+
 					 //monsters
 					 
 			) {
-				board[i][j] = 4;
+				board[i][j] = 4.1;
+			}else if (
+			
+				(i == 13 && j == 4) ||
+				(i == 13 && j == 5) ||
+				(i == 13 && j == 6) ||
+				(i == 13 && j == 7) ||
+				(i == 13 && j == 8) ||
+				(i == 13 && j == 9) ||
+				(i == 17 && j == 4) ||
+				(i == 17 && j == 5) ||
+				(i == 17 && j == 6) ||
+				(i == 17 && j == 7) ||
+				(i == 17 && j == 8) ||
+				(i == 17 && j == 9)
+			){
+				board[i][j] = 4.2;
 			} else {
 				var randomNum = Math.random();
 				//low points ball - 1.1
@@ -72,7 +147,7 @@ function Start() {
 				else if (randomNum <= (1.0 * medium_points_balls_remain) / cnt) {
 					medium_points_balls_remain--;
 					food_remain--;
-					board[i][j] = 1;
+					board[i][j] = 1.2;
 				}
 				//high points ball - 1.3
 				else if (randomNum <= (1.0 * high_points_balls_remain) / cnt) {
@@ -163,11 +238,11 @@ function Draw() {
 	lblUserName.value = sessionStorage.getItem("user_name");
 	
 	pac.src = "resource\\pacman_"+pacPosition+".png";
-	for (var i = 0; i < 10; i++) {
-		for (var j = 0; j < 10; j++) {
+	for (var i = 0; i < 22; i++) {
+		for (var j = 0; j < 12; j++) {
 			var center = new Object();
-			center.x = i * 60 + 30;
-			center.y = j * 60 + 30;
+			center.x = i * 60 + 15;
+			center.y = j * 60 + 15;
 			
 			if (board[i][j] == 2) {
 				/*
@@ -185,23 +260,31 @@ function Draw() {
 				
 			} else if (board[i][j] == 1.1) {
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
 				context.fillStyle = sessionStorage.getItem("low_points_balls_color"); //color
 				context.fill();
 			} else if (board[i][j] == 1.2) {
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
 				context.fillStyle = sessionStorage.getItem("medium_points_balls_color");; //color
 				context.fill();
 			} else if (board[i][j] == 1.3) {
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
 				context.fillStyle  = sessionStorage.getItem("high_points_balls_color"); //color
 				context.fill();
-			} else if (board[i][j] == 4) {
+				//column wall
+			} else if (board[i][j] == 4.1) {
 				context.beginPath();
-				context.rect(center.x - 30, center.y - 30, 60, 60);
-				context.fillStyle = "grey"; //color
+				context.rect(center.x - 15, center.y - 15, 60, 60);
+				context.fillStyle = "blue"; //color
+				context.fill();
+			}
+			//row wall
+			 else if (board[i][j] == 4.2) {
+				context.beginPath();
+				context.rect(center.x - 15, center.y - 15, 15, 60);
+				context.fillStyle = "#003366"; //color
 				context.fill();
 			}
 		}
@@ -213,25 +296,25 @@ function UpdatePosition() {
 	var x = GetKeyPressed();
 	if (x == 1) {
 		pacPosition = "U";
-		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
+		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4.1 && shape.j > 0 && board[shape.i][shape.j - 1] != 4.2) {
 			shape.j--;
 		}
 	}
 	if (x == 2) {
 		pacPosition = "D";
-		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
+		if (shape.j < 11 && board[shape.i][shape.j + 1] != 4.1 && (shape.j < 11 && board[shape.i][shape.j + 1] != 4.2) ){
 			shape.j++;
 		}
 	}
 	if (x == 3) {
 		pacPosition = "L";
-		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
+		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4.1 && shape.i > 0 && board[shape.i - 1][shape.j] != 4.2) {
 			shape.i--;
 		}
 	}
 	if (x == 4) {
 		pacPosition = "R";
-		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
+		if (shape.i <21 && board[shape.i + 1][shape.j] != 4.1 && shape.i <21 && board[shape.i + 1][shape.j] != 4.2) {
 			shape.i++;
 		}
 	}
