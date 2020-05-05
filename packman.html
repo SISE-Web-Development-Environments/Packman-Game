@@ -15,7 +15,7 @@
 </head>
 
 <body>
-
+	
 	<header>HEADER
 		<button id="clear" onclick="clearLocalStorage()"> Clear Local Storage </button>
 	</header>
@@ -87,7 +87,7 @@
 			</div>
 			<div>
 				<label for="login_password">Password:</label>
-				<input type="text" id="login_password" />
+				<input type="password" id="login_password" />
 			</div>
 			<button id="login_start_button" onclick="login_start()"> Log In </button>
 		</div>
@@ -190,6 +190,10 @@
 			<div id="user_name_player">
 				<label for="lblUserName" style="color: white;">PACMAN NAME:</label>
 				<input id="lblUserName" type="text" />
+			</div>
+			<div id="lives">
+				<label for="lblLives" style="color: white;">LIVES:</label>
+				<input id="lblLives" type="text" />
 			</div>
 			<canvas id="canvas" class="changedDivs" height="750" width="1350"></canvas>		
 			<button id="game_button" onclick="showOnlyGame()"> New game </button>

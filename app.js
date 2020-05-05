@@ -4,6 +4,7 @@ var shape = new Object();
 var board;
 var m_board;
 var score;
+var lives;
 var pac_color;
 var start_time;
 var time_elapsed;
@@ -43,6 +44,7 @@ function Start() {
 	board = new Array();
 	m_board = new Array();
 	score = 0;
+	lives = 5;
 	pac_color = "yellow";
 	var cnt = 22 * 12;
 	var food_remain = sessionStorage.getItem("balls_amount");
@@ -56,8 +58,8 @@ function Start() {
 		m_board[i] = new Array();
 		for (var j = 0; j < 12; j++) {
 			//monsters
-			//n_monsters = sessionStorage.getItem("n_monsters");//string or int?
-			n_monsters = 4;
+			n_monsters = sessionStorage.getItem("n_monsters");//string or int?
+			
 			if (i == 1 && j == 1) {
 				monstersLocations = new Array();
 				monstersLocations[0] = new Array();
@@ -280,8 +282,9 @@ function GetKeyPressed() {
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
-	lblTime.value = time_elapsed;
+	lblTime.value = Math.floor(time_elapsed);
 	lblUserName.value = sessionStorage.getItem("user_name");
+	lblLives.value = lives;
 
 	pac.src = "resource\\pacman_" + pacPosition + ".png";
 	for (var i = 0; i < 22; i++) {
@@ -414,9 +417,29 @@ function UpdatePosition() {
 	var currentTime = new Date();
 	time_elapsed = sessionStorage.getItem("game_duration") - ((currentTime - start_time) / 1000);
 
-	if (score >= 20 && time_elapsed <= 10) {
-		pac_color = "green";
+	//  if (score >= 20 && time_elapsed <= 10) {
+	//  	pac_color = "green";
+	//  }
+	if(m_board[shape.i][shape.j]==3.1){
+		lives--;
+		score -=10;
 	}
+	else if(m_board[shape.i][shape.j]==3.2){
+		lives--;
+		score-=20;
+	}
+	else if(m_board[shape.i][shape.j]==3.3){
+		lives-=2;
+		score-=30
+	}
+	else if(m_board[shape.i][shape.j]==3.4){
+		lives-=2;
+		score-=40;
+	}
+	if(lives==0){
+		
+	}
+
 	if (time_elapsed <= 0) {
 		window.clearInterval(interval);
 		if (score < 100) {
