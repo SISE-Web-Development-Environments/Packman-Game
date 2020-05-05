@@ -32,7 +32,7 @@ function login_start(){
 				alert("welcome "+user_name.value);
 				
 				//TODO: set settings and start the game
-				var retrievedSettings = localStorage.getItem(user_name.value+"_settings"); 
+				var retrievedSettings = localStorage.getItem(user_name.value+ "_settings"); 
 				var settings =  JSON.parse(retrievedSettings);
 				sessionStorage.setItem("balls_amount", settings[0]);
 				sessionStorage.setItem("low_points_balls_color", settings[1]);
