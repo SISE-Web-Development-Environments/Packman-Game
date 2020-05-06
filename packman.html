@@ -39,7 +39,7 @@
 		<!-- <button id="game_button" onclick="showOnlyGame()"> play - just for tests </button> -->
 	</menu>
 
-	<content>
+	<content id="content">
 		<!-- WELCOME -->
 		<div id="welcome" class="changedDivs" style="display: none">
 			<div style="color: rgb(215, 229, 182) ; text-align:right">בס"ד</div>
@@ -87,7 +87,7 @@
 					date:</label>
 				<input type="date" id="birth_date" value="1994-01-01" min="1930-01-01" max="2020-01-01">
 			</div>
-			<br>
+			<div style="height: 150px;"></div>
 			<div style=" text-align:center">
 				<div id="success" style="font-size: 50px; color: rgb(215, 229, 182)"> Fill details before you continue
 				</div>
@@ -116,6 +116,7 @@
 				<input type="password" id="login_password" />
 			</div>
 			<button class="login_start_button" onclick="login_start()"> Log In </button>
+			<div style="height: 280px;"></div>
 		</div>
 
 		<!-- SETTING -->

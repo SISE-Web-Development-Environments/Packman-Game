@@ -1,11 +1,12 @@
 
 var context;
 var shape = new Object();
+var coinShape = new Object();
 var board;
 var m_board;
+var c_board;
 var score;
 var lives;
-var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
@@ -14,6 +15,7 @@ let white_monster = new Image();
 let pink_monster = new Image();
 let grey_monster = new Image();
 let funny_monster = new Image();
+let fifty_cent = new Image();
 let pacPosition;
 let oneTime;
 let isPaused;
@@ -45,15 +47,14 @@ function showOnlyGame() {
 function Start() {
 	board = new Array();
 	m_board = new Array();
+	c_board = new Array();
 	score = 0;
 	lives = 5;
-	pac_color = "yellow";
 	var cnt = 22 * 12;
 	var food_remain = sessionStorage.getItem("balls_amount");
 	var low_points_balls_remain = food_remain * 0.6;
 	var medium_points_balls_remain = food_remain * 0.3;
 	var high_points_balls_remain = food_remain * 0.1;
-	var pacman_state = false;
 	oneTime = true;
 	pacPosition = "R";
 	start_time = new Date();
@@ -97,6 +98,7 @@ function Start() {
 			}
 		}
 	}
+
 
 	for (var i = 0; i < 22; i++) {
 		board[i] = new Array();
@@ -218,6 +220,7 @@ function Start() {
 			}
 		}
 	}
+
 	while (low_points_balls_remain > 0) {
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 1.1;
@@ -240,6 +243,24 @@ function Start() {
 	shape.j = emptyCell[1];
 	board[emptyCell[0]][emptyCell[1]] = 2;
 
+	//random start for to 50 coin
+	for (var i = 0; i < 22; i++) {
+		c_board[i] = new Array();
+		for (var j = 0; j < 12; j++) {
+			c_board[i][j] = 0;
+		}
+	}
+	var emptyCellFor50 = findRandomEmptyCell(c_board)
+	while (board[emptyCellFor50[0]][emptyCellFor50[1]] == 2 ||
+		board[emptyCellFor50[0]][emptyCellFor50[1]] == 3 ||
+		board[emptyCellFor50[0]][emptyCellFor50[1]] == 4.1 ||
+		board[emptyCellFor50[0]][emptyCellFor50[1]] == 4.2) {
+		emptyCellFor50 = findRandomEmptyCell(c_board)
+
+	}
+	c_board[emptyCellFor50[0]][emptyCellFor50[1]] = 1;
+	coinShape.i = emptyCellFor50[0];
+	coinShape.j = emptyCellFor50[1];
 
 	keysDown = {};
 	addEventListener(
@@ -256,18 +277,18 @@ function Start() {
 		},
 		false
 	);
-	if ($('#game').is(':visible')) {
-		interval = setInterval(UpdatePosition, 250);
-	}
+
+	interval = window.setInterval(UpdatePosition, 250);
+
 
 }
 
 function findRandomEmptyCell(board) {
-	var i = Math.floor(Math.random() * 11 + 1);
-	var j = Math.floor(Math.random() * 21 + 1);
+	var i = Math.floor((Math.random() * 21) + 1);
+	var j = Math.floor((Math.random() * 11) + 1);
 	while (board[i][j] != 0) {
-		i = Math.floor(Math.random() * 11 + 1);
-		j = Math.floor(Math.random() * 21 + 1);
+		i = Math.floor((Math.random() * 21) + 1);
+		j = Math.floor((Math.random() * 11) + 1);
 	}
 	return [i, j];
 }
@@ -298,6 +319,10 @@ function GetKeyPressed() {
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
+	if ($('#game').is(':visible')) {
+		var currentTime = new Date();
+		time_elapsed = sessionStorage.getItem("game_duration") - ((currentTime - start_time) / 1000);
+	}
 	lblTime.value = Math.floor(time_elapsed);
 	lblUserName.value = sessionStorage.getItem("user_name");
 	lblLives.value = lives;
@@ -307,15 +332,17 @@ function Draw() {
 		var emptyCell = findRandomEmptyCell(board);
 		shape.i = emptyCell[0];
 		shape.j = emptyCell[1];
-		board[emptyCell[0]][emptyCell[1]] = 2;				
+		board[emptyCell[0]][emptyCell[1]] = 2;
 	}
 
 	pac.src = "resource\\pacman_" + pacPosition + ".png";
+	fifty_cent.src = "resource\\50.png";
 	for (var i = 0; i < 22; i++) {
 		for (var j = 0; j < 12; j++) {
 			var center = new Object();
 			center.x = i * 60 + 15;
 			center.y = j * 60 + 15;
+
 
 			if (board[i][j] == 2) {
 				context.drawImage(pac, center.x - 15, center.y - 15);
@@ -336,6 +363,8 @@ function Draw() {
 				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
 				context.fillStyle = sessionStorage.getItem("high_points_balls_color"); //color
 				context.fill();
+
+
 				//column wall
 			} else if (board[i][j] == 4.1) {
 				context.beginPath();
@@ -343,12 +372,18 @@ function Draw() {
 				context.fillStyle = "blue"; //color
 				context.fill();
 			}
+
+
 			//row wall
 			else if (board[i][j] == 4.2) {
 				context.beginPath();
 				context.rect(center.x - 15, center.y - 15, 15, 60);
 				context.fillStyle = "#003366"; //color
 				context.fill();
+			}
+			//coin
+			if (c_board[i][j] == 1) {
+				context.drawImage(fifty_cent, center.x - 15, center.y - 15);
 			}
 		}
 	}
@@ -407,7 +442,7 @@ function UpdatePosition() {
 			shape.j = emptyCell[1];
 			board[emptyCell[0]][emptyCell[1]] = 2;
 			Draw();
-			UpdateMonstersPosition();			
+			UpdateMonstersPosition();
 		}
 		else {
 
@@ -447,9 +482,12 @@ function UpdatePosition() {
 				score = score + 25;
 			}
 			board[shape.i][shape.j] = 2;
-			var currentTime = new Date();
-			time_elapsed = sessionStorage.getItem("game_duration") - ((currentTime - start_time) / 1000);
+			updateCoinPosition();
 
+			if ($('#game').is(':visible')) {
+				var currentTime = new Date();
+				time_elapsed = sessionStorage.getItem("game_duration") - ((currentTime - start_time) / 1000);
+			}
 
 			if (m_board[shape.i][shape.j] == 3.1) {
 				lives--;
@@ -492,12 +530,38 @@ function UpdatePosition() {
 				UpdateMonstersPosition();
 			}
 		}
-		
+
 	}
 	else {//if isPaused: continue drawing but not update location - NECCESSARY FOR IMAGE!
 		Draw();
 		UpdateMonstersPosition();
 	}
+}
+
+function updateCoinPosition() {
+	c_board[coinShape.i][coinShape.j] = 0;
+	let random = Math.random();
+	if (random > 0.75) {				//move up or down
+		if (coinShape.i < 21 && board[coinShape.i + 1][coinShape.j] != 4.1 && coinShape.i < 21 && board[coinShape.i + 1][coinShape.j] != 4.2) {
+			coinShape.i++;
+		}
+	}
+	else if (random > 0.5 && random <= 0.75){
+		if (coinShape.i > 0 && board[coinShape.i - 1][coinShape.j] != 4.1 && coinShape.i > 0 && board[coinShape.i - 1][coinShape.j] != 4.2) {
+			coinShape.i--;
+		}
+	}
+	else if (random > 0.25 && random <= 0.5){
+		if (coinShape.j < 11 && board[coinShape.i][coinShape.j + 1] != 4.1 && (coinShape.j < 11 && board[coinShape.i][coinShape.j + 1] != 4.2)) {
+			coinShape.j++;
+		}
+	}
+	else{
+		if (coinShape.j > 0 && board[coinShape.i][coinShape.j - 1] != 4.1 && coinShape.j > 0 && board[coinShape.i][coinShape.j - 1] != 4.2) {
+			coinShape.j--;
+		}
+	}
+	c_board[coinShape.i][coinShape.j] = 1;
 }
 
 function UpdateMonstersPosition() {
@@ -509,27 +573,27 @@ function UpdateMonstersPosition() {
 				m2 = monstersLocations[i][1]
 				let type = m_board[m1][m2];
 				m_board[m1][m2] = 0;
-				
+
 
 				if (i == 0) {
 					m_board[1][1] = type
-					monstersLocations[i][0]=1
-					monstersLocations[i][1]=1
+					monstersLocations[i][0] = 1
+					monstersLocations[i][1] = 1
 				}
 				else if (i == 1) {
 					m_board[1][10] = type
-					monstersLocations[i][0]=1
-					monstersLocations[i][1]=10
+					monstersLocations[i][0] = 1
+					monstersLocations[i][1] = 10
 				}
 				else if (i == 2) {
 					m_board[20][1] = type
-					monstersLocations[i][0]=20
-					monstersLocations[i][1]=1
+					monstersLocations[i][0] = 20
+					monstersLocations[i][1] = 1
 				}
 				else {
 					m_board[20][10] = type
-					monstersLocations[i][0]=20
-					monstersLocations[i][1]=10
+					monstersLocations[i][0] = 20
+					monstersLocations[i][1] = 10
 				}
 			}
 			wasEaten = false;
@@ -590,35 +654,3 @@ function UpdateMonstersPosition() {
 	DrawMonsters();//Weather isPaused or not: continue drawing but not update location  - NECCESSARY FOR IMAGE!
 }
 
-// function UpdateLocationAfterMonsterAteYou() {
-// 	//pacman
-// 	board[shape.i][shape.j] = 0
-// 	var emptyCell = findRandomEmptyCell(board);
-// 	shape.i = emptyCell[0];
-// 	shape.j = emptyCell[1];
-// 	board[emptyCell[0]][emptyCell[1]] = 2;
-// 	//monsters
-// 	for (var i = 0; i < n_monsters; i++) {
-// 		m1 = monstersLocations[i][0]
-// 		m2 = monstersLocations[i][1]
-// 		let type = m_board[m1][m2];
-// 		m_board[m1][m2] = 0;
-
-
-// 		if (i == 0) {
-// 			m_board[1][1] = type
-// 		}
-// 		else if (i == 1) {
-// 			m_board[1][10] = type
-// 		}
-// 		else if (i == 2) {
-// 			m_board[20][1] = type
-// 		}
-// 		else {
-// 			m_board[20][10] = type
-// 		}
-// 	}
-// 	oneTime = true;
-// 	Draw();
-// 	DrawMonsters();
-// }

@@ -41,6 +41,8 @@
     background-color: rgb(244, 247, 239);  
 }
 
+
+
 #welcome
 {
     background-image: url('welcome.jpg');
@@ -70,7 +72,7 @@
 {
     background-image: url('welcome.jpg');
 	background-repeat: no-repeat;	
-    /*background-size: 100% 100%;*/
+    background-size: 100% 100%;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
 }
@@ -99,7 +101,7 @@
 {
     background-image: url('welcome.jpg');
 	background-repeat: no-repeat;	
-    /*background-size: 100% 100%;*/
+    background-size: 100% 100%;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
 }
