@@ -302,6 +302,14 @@ function Draw() {
 	lblUserName.value = sessionStorage.getItem("user_name");
 	lblLives.value = lives;
 
+	if (wasEaten) {
+		board[shape.i][shape.j] = 0
+		var emptyCell = findRandomEmptyCell(board);
+		shape.i = emptyCell[0];
+		shape.j = emptyCell[1];
+		board[emptyCell[0]][emptyCell[1]] = 2;				
+	}
+
 	pac.src = "resource\\pacman_" + pacPosition + ".png";
 	for (var i = 0; i < 22; i++) {
 		for (var j = 0; j < 12; j++) {
@@ -398,7 +406,8 @@ function UpdatePosition() {
 			shape.i = emptyCell[0];
 			shape.j = emptyCell[1];
 			board[emptyCell[0]][emptyCell[1]] = 2;
-			
+			Draw();
+			UpdateMonstersPosition();			
 		}
 		else {
 
@@ -483,8 +492,7 @@ function UpdatePosition() {
 				UpdateMonstersPosition();
 			}
 		}
-		Draw();
-		UpdateMonstersPosition();
+		
 	}
 	else {//if isPaused: continue drawing but not update location - NECCESSARY FOR IMAGE!
 		Draw();

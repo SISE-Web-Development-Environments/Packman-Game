@@ -155,9 +155,18 @@
     width:  80%;
     height:  80%;
 }
+
 #footer{
     background-color:darkgreen ;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
-    
+    color: azure;
+    display: flex;
+    justify-content: left;
 }
+
+.footer{
+    padding-right: 12px;
+    padding-left: 12px;
+}
+
