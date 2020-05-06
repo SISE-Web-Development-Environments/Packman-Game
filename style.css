@@ -9,7 +9,18 @@
     background-color:darkgreen ;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
+    display: flex;
+    justify-content: left;
+   
 }
+.header{
+    padding-right: 12px;
+    padding-left: 12px;
+}
+/* #block1 #block2{
+    display:inline;
+} */
+
 #menu{
     background-color: rgb(110, 158, 110);
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -74,18 +85,15 @@
     background-color: rgb(215, 229, 182);
     color: rgb(5, 68, 5);   
 }
-.submit_button:hover {
+.submit_button:hover:enabled {
     background-color: rgb(244, 247, 239);  
 }
-/* label {
-    display: block;
-    font: 1rem 'Fira Sans', sans-serif;
-}
 
-input,
-label {
-    margin: .4rem 0;
-} */
+.submit_button:disabled ,
+    submit_button[disabled]{
+    border: 2px solid rgb(66, 90, 66);
+    color: rgb(66, 90, 66); 
+}
 
 #login
 {

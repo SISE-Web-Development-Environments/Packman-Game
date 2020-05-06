@@ -4,9 +4,9 @@ $(document).ready(function() {
 
 let current_user_name;
 
-function clearLocalStorage() {
-	localStorage.clear();
-}
+// function clearLocalStorage() {
+// 	localStorage.clear();
+// }
 /* ---------------- USER P ---------------- */
 function createUserP() {	
 	if(localStorage.getItem("p")==null){
@@ -67,6 +67,7 @@ function submit() {
 		current_user_name=	user_name;	
 		$("#success").html("")
 		$("#success").append("Your details have been successfully entered")
+		$("#setting_button").attr("disabled", false);
 	}
 
 }

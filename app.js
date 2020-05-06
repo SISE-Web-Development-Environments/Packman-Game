@@ -9,13 +9,15 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
-var interval2;
 let pac = new Image();
 let white_monster = new Image();
 let pink_monster = new Image();
 let grey_monster = new Image();
 let funny_monster = new Image();
 let pacPosition;
+let oneTime;
+let isPaused;
+let wasEaten = false;
 
 // $(document).ready(function() {
 // 	context = canvas.getContext("2d");
@@ -36,7 +38,7 @@ function showOnlyGame() {
 	var e6 = document.getElementById("game");
 	e6.style.display = 'block';
 	var canvas = document.getElementById('canvas');
-	context = canvas.getContext("2d");	
+	context = canvas.getContext("2d");
 	Start();
 }
 
@@ -52,6 +54,7 @@ function Start() {
 	var medium_points_balls_remain = food_remain * 0.3;
 	var high_points_balls_remain = food_remain * 0.1;
 	var pacman_state = false;
+	oneTime = true;
 	pacPosition = "R";
 	start_time = new Date();
 	for (var i = 0; i < 22; i++) {
@@ -59,33 +62,37 @@ function Start() {
 		for (var j = 0; j < 12; j++) {
 			//monsters
 			n_monsters = sessionStorage.getItem("n_monsters");//string or int?
-			
+
 			if (i == 1 && j == 1) {
 				monstersLocations = new Array();
 				monstersLocations[0] = new Array();
 				monstersLocations[0][0] = i
 				monstersLocations[0][1] = j
 				m_board[i][j] = 3.1;
+
 			}
 			else if (i == 1 && j == 10 && n_monsters > 1) {
 				m_board[i][j] = 3.2;
 				monstersLocations[1] = new Array();
 				monstersLocations[1][0] = i
 				monstersLocations[1][1] = j
+					;
 			}
 			else if (i == 20 && j == 1 && n_monsters > 2) {
 				m_board[i][j] = 3.3;
 				monstersLocations[2] = new Array();
 				monstersLocations[2][0] = i
 				monstersLocations[2][1] = j
+					;
 			}
 			else if (i == 20 && j == 10 && n_monsters > 3) {
 				m_board[i][j] = 3.4;
 				monstersLocations[3] = new Array();
 				monstersLocations[3][0] = i
 				monstersLocations[3][1] = j
+
 			}
-			else{
+			else {
 				m_board[i][j] = 0;
 			}
 		}
@@ -97,6 +104,10 @@ function Start() {
 			if (i == 21 || j == 11 || i == 0 || j == 0) {
 				board[i][j] = 4.1;
 			}
+			else if ((i == 1 && j == 1) || (i == 1 && j == 10) || (i == 20 && j == 1) || (i == 20 && j == 10)) {
+				board[i][j] = 3;
+			}
+
 			else if (
 				// walls
 
@@ -177,16 +188,7 @@ function Start() {
 				(i == 17 && j == 6) ||
 				(i == 17 && j == 7) ||
 				(i == 17 && j == 8) ||
-				(i == 17 && j == 9) ||
-				(i == 4 && j == 9) ||
-				(i == 4 && j == 8) ||
-				(i == 5 && j == 8) ||
-				(i == 6 && j == 8) ||
-				(i == 6 && j == 9) ||
-				(i == 4 && j == 4) ||
-				(i == 5 && j == 4) ||
-				(i == 6 && j == 4) 
-
+				(i == 17 && j == 9)
 			) {
 				board[i][j] = 4.2;
 			} else {
@@ -208,7 +210,8 @@ function Start() {
 					high_points_balls_remain--;
 					food_remain--;
 					board[i][j] = 1.3;
-				} else {
+				}
+				else {
 					board[i][j] = 0;
 				}
 				cnt--;
@@ -253,16 +256,18 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 250);
-	//interval2 = setInterval(UpdateMonstersPosition, 400);
+	if ($('#game').is(':visible')) {
+		interval = setInterval(UpdatePosition, 250);
+	}
+
 }
 
 function findRandomEmptyCell(board) {
-	var i = Math.floor(Math.random() * 21 + 1);
-	var j = Math.floor(Math.random() * 11 + 1);
+	var i = Math.floor(Math.random() * 11 + 1);
+	var j = Math.floor(Math.random() * 21 + 1);
 	while (board[i][j] != 0) {
-		i = Math.floor(Math.random() * 21 + 1);
-		j = Math.floor(Math.random() * 11 + 1);
+		i = Math.floor(Math.random() * 11 + 1);
+		j = Math.floor(Math.random() * 21 + 1);
 	}
 	return [i, j];
 }
@@ -288,6 +293,8 @@ function GetKeyPressed() {
 
 
 
+
+
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
@@ -301,21 +308,11 @@ function Draw() {
 			var center = new Object();
 			center.x = i * 60 + 15;
 			center.y = j * 60 + 15;
+
 			if (board[i][j] == 2) {
-
-				// context.beginPath();
-				// context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-				// context.lineTo(center.x, center.y);
-				// context.fillStyle = pac_color; //color
-				// context.fill();
-				// context.beginPath();
-				// context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
-				// context.fillStyle = "black"; //color
-				// context.fill();
-
 				context.drawImage(pac, center.x - 15, center.y - 15);
-
 			}
+
 			else if (board[i][j] == 1.1) {
 				context.beginPath();
 				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
@@ -341,7 +338,7 @@ function Draw() {
 			//row wall
 			else if (board[i][j] == 4.2) {
 				context.beginPath();
-				context.rect(center.x - 15, center.y - 15, 30, 30);
+				context.rect(center.x - 15, center.y - 15, 15, 60);
 				context.fillStyle = "#003366"; //color
 				context.fill();
 			}
@@ -364,153 +361,256 @@ function DrawMonsters() {
 			//canvas.width = canvas.width;
 
 			if (m_board[i][j] == 3.1) {
-			
+
 				context.drawImage(pink_monster, center.x - 15, center.y - 15);
 			}
 			else if (m_board[i][j] == 3.2) {
-			
+
 				context.drawImage(white_monster, center.x - 15, center.y - 15);
 			}
 			else if (m_board[i][j] == 3.3) {
-				
+
 				context.drawImage(grey_monster, center.x - 15, center.y - 15);
 			}
 			else if (m_board[i][j] == 3.4) {
-				
+
 				context.drawImage(funny_monster, center.x - 15, center.y - 15);
 			}
 		}
 	}
+	if (oneTime) {
+		isPaused = true;
+		oneTime = false;
+	}
+
 }
 
-
+function setPausedFalse() {
+	isPaused = false;
+}
 
 function UpdatePosition() {
-	board[shape.i][shape.j] = 0;
-	var x = GetKeyPressed();
-	if (x == 1) {
-		pacPosition = "U";
-		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4.1 && shape.j > 0 && board[shape.i][shape.j - 1] != 4.2) {
-			shape.j--;
-		}
-	}
-	if (x == 2) {
-		pacPosition = "D";
-		if (shape.j < 11 && board[shape.i][shape.j + 1] != 4.1 && (shape.j < 11 && board[shape.i][shape.j + 1] != 4.2)) {
-			shape.j++;
-		}
-	}
-	if (x == 3) {
-		pacPosition = "L";
-		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4.1 && shape.i > 0 && board[shape.i - 1][shape.j] != 4.2) {
-			shape.i--;
-		}
-	}
-	if (x == 4) {
-		pacPosition = "R";
-		if (shape.i < 21 && board[shape.i + 1][shape.j] != 4.1 && shape.i < 21 && board[shape.i + 1][shape.j] != 4.2) {
-			shape.i++;
-		}
-	}
-	if (board[shape.i][shape.j] == 1.1) {
-		score = score + 5;
-	}
-	if (board[shape.i][shape.j] == 1.2) {
-		score = score + 15;
-	}
-	if (board[shape.i][shape.j] == 1.3) {
-		score = score + 25;
-	}
-	board[shape.i][shape.j] = 2;
-	var currentTime = new Date();
-	time_elapsed = sessionStorage.getItem("game_duration") - ((currentTime - start_time) / 1000);
 
-	//  if (score >= 20 && time_elapsed <= 10) {
-	//  	pac_color = "green";
-	//  }
-	if(m_board[shape.i][shape.j]==3.1){
-		lives--;
-		score -=10;
-	}
-	else if(m_board[shape.i][shape.j]==3.2){
-		lives--;
-		score-=20;
-	}
-	else if(m_board[shape.i][shape.j]==3.3){
-		lives-=2;
-		score-=30
-	}
-	else if(m_board[shape.i][shape.j]==3.4){
-		lives-=2;
-		score-=40;
-	}
-	if(lives==0){
-		
-	}
-
-	if (time_elapsed <= 0) {
-		window.clearInterval(interval);
-		if (score < 100) {
-			window.alert("You are better than " + score + " points!");
+	if (!isPaused) {
+		if (wasEaten) {
+			board[shape.i][shape.j] = 0
+			var emptyCell = findRandomEmptyCell(board);
+			shape.i = emptyCell[0];
+			shape.j = emptyCell[1];
+			board[emptyCell[0]][emptyCell[1]] = 2;
+			
 		}
 		else {
-			window.alert("Winner!!!");
+
+			board[shape.i][shape.j] = 0;
+			var x = GetKeyPressed();
+			if (x == 1) {
+				pacPosition = "U";
+				if (shape.j > 0 && board[shape.i][shape.j - 1] != 4.1 && shape.j > 0 && board[shape.i][shape.j - 1] != 4.2) {
+					shape.j--;
+				}
+			}
+			if (x == 2) {
+				pacPosition = "D";
+				if (shape.j < 11 && board[shape.i][shape.j + 1] != 4.1 && (shape.j < 11 && board[shape.i][shape.j + 1] != 4.2)) {
+					shape.j++;
+				}
+			}
+			if (x == 3) {
+				pacPosition = "L";
+				if (shape.i > 0 && board[shape.i - 1][shape.j] != 4.1 && shape.i > 0 && board[shape.i - 1][shape.j] != 4.2) {
+					shape.i--;
+				}
+			}
+			if (x == 4) {
+				pacPosition = "R";
+				if (shape.i < 21 && board[shape.i + 1][shape.j] != 4.1 && shape.i < 21 && board[shape.i + 1][shape.j] != 4.2) {
+					shape.i++;
+				}
+			}
+			if (board[shape.i][shape.j] == 1.1) {
+				score = score + 5;
+			}
+			if (board[shape.i][shape.j] == 1.2) {
+				score = score + 15;
+			}
+			if (board[shape.i][shape.j] == 1.3) {
+				score = score + 25;
+			}
+			board[shape.i][shape.j] = 2;
+			var currentTime = new Date();
+			time_elapsed = sessionStorage.getItem("game_duration") - ((currentTime - start_time) / 1000);
+
+
+			if (m_board[shape.i][shape.j] == 3.1) {
+				lives--;
+				score -= 10;
+				wasEaten = true;
+			}
+			else if (m_board[shape.i][shape.j] == 3.2) {
+				lives--;
+				score -= 20;
+				wasEaten = true;
+			}
+			else if (m_board[shape.i][shape.j] == 3.3) {
+				lives -= 2;
+				score -= 30
+				wasEaten = true;
+			}
+			else if (m_board[shape.i][shape.j] == 3.4) {
+				lives -= 2;
+				score -= 40;
+				wasEaten = true;
+			}
+			if (lives == 0) {
+				window.clearInterval(interval);
+				window.alert("Loser!!!");
+				showOnlyGame();
+			}
+
+			if (time_elapsed <= 0) {
+				window.clearInterval(interval);
+				if (score < 100) {
+					window.alert("You are better than " + score + " points!");
+				}
+				else {
+					window.alert("Winner!!!");
+				}
+				showOnlyGame();
+			} else {
+
+				Draw();
+				UpdateMonstersPosition();
+			}
 		}
-		showOnlyGame();
-	} else {
+		Draw();
+		UpdateMonstersPosition();
+	}
+	else {//if isPaused: continue drawing but not update location - NECCESSARY FOR IMAGE!
 		Draw();
 		UpdateMonstersPosition();
 	}
 }
 
 function UpdateMonstersPosition() {
-	var coin = Math.random();	
-	let x = shape.i;
-	let y = shape.j;
-	let m1;
-	let m2;
-	for (var i = 0; i < n_monsters; i++) {
-		m1 = monstersLocations[i][0]
-		m2 = monstersLocations[i][1]
-		if (coin > 0.5 ) {				//move up or down
-			if (y - m2 < 0) {		//means: pacman is higher than monster
-				if (m2 > 0 && board[m1][m2 - 1] != 4.1 && board[m1][m2 - 1] != 4.2 && m_board[m1][m2 - 1]==0) {
-					monstersLocations[i][1]--;
-					let type = m_board[m1][m2];
-					m_board[m1][m2] = 0;
-					m_board[m1][m2 - 1] = type;
-				}
 
-			}
-			else {
-				if (m2 < 11 && board[m1][m2 + 1] != 4.1 && board[m1][m2 + 1] != 4.2 && m_board[m1][m2 + 1]==0) {
-					monstersLocations[i][1]++;
-					let type = m_board[m1][m2];
-					m_board[m1][m2] = 0;
-					m_board[m1][m2 + 1] = type;
+	if (!isPaused) {
+		if (wasEaten) {
+			for (var i = 0; i < n_monsters; i++) {
+				m1 = monstersLocations[i][0]
+				m2 = monstersLocations[i][1]
+				let type = m_board[m1][m2];
+				m_board[m1][m2] = 0;
+				
+
+				if (i == 0) {
+					m_board[1][1] = type
+					monstersLocations[i][0]=1
+					monstersLocations[i][1]=1
+				}
+				else if (i == 1) {
+					m_board[1][10] = type
+					monstersLocations[i][0]=1
+					monstersLocations[i][1]=10
+				}
+				else if (i == 2) {
+					m_board[20][1] = type
+					monstersLocations[i][0]=20
+					monstersLocations[i][1]=1
+				}
+				else {
+					m_board[20][10] = type
+					monstersLocations[i][0]=20
+					monstersLocations[i][1]=10
 				}
 			}
+			wasEaten = false;
+			oneTime = true;
 		}
+		else {
 
-		if (coin <= 0.5) {	 			// moved left or right
-			if (x - m1 < 0) {		//means: pacman is lefter than monster
-				if (m1 > 0 && board[m1 - 1][m2] != 4.1 && board[m1 - 1][m2] != 4.2 && m_board[m1 - 1][m2]==0) {
-					monstersLocations[i][0]--;
-					let type = m_board[m1][m2];
-					m_board[m1][m2] = 0;
-					m_board[m1 - 1][m2] = type;
+			var coin = Math.random();
+			let x = shape.i;
+			let y = shape.j;
+			let m1;
+			let m2;
+			for (var i = 0; i < n_monsters; i++) {
+				m1 = monstersLocations[i][0]
+				m2 = monstersLocations[i][1]
+				if (coin > 0.5) {				//move up or down
+					if (y - m2 < 0) {		//means: pacman is higher than monster
+						if (m2 > 0 && board[m1][m2 - 1] != 4.1 && board[m1][m2 - 1] != 4.2 && m_board[m1][m2 - 1] == 0) {
+							monstersLocations[i][1]--;
+							let type = m_board[m1][m2];
+							m_board[m1][m2] = 0;
+							m_board[m1][m2 - 1] = type;
+						}
+
+					}
+					else {
+						if (m2 < 11 && board[m1][m2 + 1] != 4.1 && board[m1][m2 + 1] != 4.2 && m_board[m1][m2 + 1] == 0) {
+							monstersLocations[i][1]++;
+							let type = m_board[m1][m2];
+							m_board[m1][m2] = 0;
+							m_board[m1][m2 + 1] = type;
+						}
+					}
 				}
 
-			}
-			else {
-				if (m1 < 21 && board[m1 + 1][m2] != 4.1 && board[m1 + 1][m2] != 4.2 && m_board[m1 + 1][m2]==0) {
-					monstersLocations[i][0]++;
-					let type = m_board[m1][m2];
-					m_board[m1][m2] = 0;
-					m_board[m1 + 1][m2] = type;
+				if (coin <= 0.5) {	 			// moved left or right
+					if (x - m1 < 0) {		//means: pacman is lefter than monster
+						if (m1 > 0 && board[m1 - 1][m2] != 4.1 && board[m1 - 1][m2] != 4.2 && m_board[m1 - 1][m2] == 0) {
+							monstersLocations[i][0]--;
+							let type = m_board[m1][m2];
+							m_board[m1][m2] = 0;
+							m_board[m1 - 1][m2] = type;
+						}
+
+					}
+					else {
+						if (m1 < 21 && board[m1 + 1][m2] != 4.1 && board[m1 + 1][m2] != 4.2 && m_board[m1 + 1][m2] == 0) {
+							monstersLocations[i][0]++;
+							let type = m_board[m1][m2];
+							m_board[m1][m2] = 0;
+							m_board[m1 + 1][m2] = type;
+						}
+					}
 				}
 			}
 		}
 	}
-	DrawMonsters();
+	DrawMonsters();//Weather isPaused or not: continue drawing but not update location  - NECCESSARY FOR IMAGE!
 }
+
+// function UpdateLocationAfterMonsterAteYou() {
+// 	//pacman
+// 	board[shape.i][shape.j] = 0
+// 	var emptyCell = findRandomEmptyCell(board);
+// 	shape.i = emptyCell[0];
+// 	shape.j = emptyCell[1];
+// 	board[emptyCell[0]][emptyCell[1]] = 2;
+// 	//monsters
+// 	for (var i = 0; i < n_monsters; i++) {
+// 		m1 = monstersLocations[i][0]
+// 		m2 = monstersLocations[i][1]
+// 		let type = m_board[m1][m2];
+// 		m_board[m1][m2] = 0;
+
+
+// 		if (i == 0) {
+// 			m_board[1][1] = type
+// 		}
+// 		else if (i == 1) {
+// 			m_board[1][10] = type
+// 		}
+// 		else if (i == 2) {
+// 			m_board[20][1] = type
+// 		}
+// 		else {
+// 			m_board[20][10] = type
+// 		}
+// 	}
+// 	oneTime = true;
+// 	Draw();
+// 	DrawMonsters();
+// }
