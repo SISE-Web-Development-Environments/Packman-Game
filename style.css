@@ -2,6 +2,33 @@
     width:  100%;
     height:  100%;
 }
+#body{
+    background-color: darkgreen ;
+}
+#header{
+    background-color:darkgreen ;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+#menu{
+    background-color: rgb(110, 158, 110);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+.menu_button{
+    margin: 10px;
+    border: 2px solid rgb(5, 68, 5);
+    border-radius: 12px;
+    font-size: 30px;  
+    padding: 5px;
+    padding-right: 12px;
+    padding-left: 12px;
+    background-color: rgb(215, 229, 182);
+    color: rgb(5, 68, 5); 
+}
+.menu_button:hover {
+    background-color: rgb(244, 247, 239);  
+}
 
 #welcome
 {
@@ -30,9 +57,26 @@
 
 #signup
 {
-    background-color:gold
+    background-image: url('welcome.jpg');
+	background-repeat: no-repeat;	
+    /*background-size: 100% 100%;*/
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
 }
-
+.submit_button{
+    margin: 10px;
+    border: 2px solid rgb(5, 68, 5);
+    border-radius: 12px;
+    font-size: 30px;  
+    padding: 5px;
+    padding-right: 12px;
+    padding-left: 12px;
+    background-color: rgb(215, 229, 182);
+    color: rgb(5, 68, 5);   
+}
+.submit_button:hover {
+    background-color: rgb(244, 247, 239);  
+}
 /* label {
     display: block;
     font: 1rem 'Fira Sans', sans-serif;
@@ -45,20 +89,67 @@ label {
 
 #login
 {
-    background-color:salmon
+    background-image: url('welcome.jpg');
+	background-repeat: no-repeat;	
+    /*background-size: 100% 100%;*/
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+.login_start_button{
+    margin: 10px;
+    border: 2px solid rgb(5, 68, 5);
+    border-radius: 12px;
+    font-size: 30px;  
+    padding: 5px;
+    padding-right: 12px;
+    padding-left: 12px;
+    background-color: rgb(215, 229, 182);
+    color: rgb(5, 68, 5);   
 }
 
 #about
 {
-    background-color:yellowgreen
+    background-image: url('welcome.jpg');
+	background-repeat: no-repeat;	
+    /*background-size: 100% 100%;*/
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
 }
 
 #settings
 {
-    background-color:rgb(142, 236, 224)
+    background-image: url('welcome.jpg');
+	background-repeat: no-repeat;	
+    /*background-size: 100% 100%;*/
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+.settings_button{
+    margin: 10px;
+    border: 2px solid rgb(5, 68, 5);
+    border-radius: 12px;
+    font-size: 30px;  
+    padding: 5px;
+    padding-right: 12px;
+    padding-left: 12px;
+    background-color: rgb(215, 229, 182);
+    color: rgb(5, 68, 5); 
+}
+.settings_button:hover {
+    background-color: rgb(244, 247, 239);  
 }
 #game
 {
     background-color: black;
+    
+}
+.game_window{
+    width:  80%;
+    height:  80%;
+}
+#footer{
+    background-color:darkgreen ;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
     
 }

@@ -177,7 +177,16 @@ function Start() {
 				(i == 17 && j == 6) ||
 				(i == 17 && j == 7) ||
 				(i == 17 && j == 8) ||
-				(i == 17 && j == 9)
+				(i == 17 && j == 9) ||
+				(i == 4 && j == 9) ||
+				(i == 4 && j == 8) ||
+				(i == 5 && j == 8) ||
+				(i == 6 && j == 8) ||
+				(i == 6 && j == 9) ||
+				(i == 4 && j == 4) ||
+				(i == 5 && j == 4) ||
+				(i == 6 && j == 4) 
+
 			) {
 				board[i][j] = 4.2;
 			} else {
@@ -292,7 +301,6 @@ function Draw() {
 			var center = new Object();
 			center.x = i * 60 + 15;
 			center.y = j * 60 + 15;
-
 			if (board[i][j] == 2) {
 
 				// context.beginPath();
@@ -333,7 +341,7 @@ function Draw() {
 			//row wall
 			else if (board[i][j] == 4.2) {
 				context.beginPath();
-				context.rect(center.x - 15, center.y - 15, 15, 60);
+				context.rect(center.x - 15, center.y - 15, 30, 30);
 				context.fillStyle = "#003366"; //color
 				context.fill();
 			}

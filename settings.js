@@ -130,9 +130,9 @@ function showOnlySettings() {
 
 
 	 var details = [balls_amount, low_points_balls_color, medium_points_balls_color, high_points_balls_color, game_duration, n_monsters, key_up, key_down, key_left, key_right];
-	 //var user_name = sessionStorage.getItem("signup_user_name").value;
-	 localStorage.setItem(current_user_name+"_settings", JSON.stringify(details));	
-	 sessionStorage.setItem("user_name", current_user_name);	
+		 //var user_name = sessionStorage.getItem("signup_user_name").value;
+		 localStorage.setItem(current_user_name+"_settings", JSON.stringify(details));	
+		 sessionStorage.setItem("user_name", current_user_name);	
  }
  function randomSettings(){
 	document.getElementById("balls_amount").innerHTML = 60;
