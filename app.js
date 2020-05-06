@@ -258,11 +258,11 @@ function Start() {
 }
 
 function findRandomEmptyCell(board) {
-	var i = Math.floor(Math.random() * 9 + 1);
-	var j = Math.floor(Math.random() * 9 + 1);
+	var i = Math.floor(Math.random() * 21 + 1);
+	var j = Math.floor(Math.random() * 11 + 1);
 	while (board[i][j] != 0) {
-		i = Math.floor(Math.random() * 9 + 1);
-		j = Math.floor(Math.random() * 9 + 1);
+		i = Math.floor(Math.random() * 21 + 1);
+		j = Math.floor(Math.random() * 11 + 1);
 	}
 	return [i, j];
 }
