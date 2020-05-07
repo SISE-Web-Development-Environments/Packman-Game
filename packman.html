@@ -13,8 +13,8 @@
 
 </head>
 
-<body id="body" onkeydown="setPausedFalse()">	
-			
+<body id="body" onkeydown="setPausedFalse()">
+
 	<header id="header">
 
 		<div><img src="resource//logo.png"></div>
@@ -54,8 +54,8 @@
 		</div>
 
 		<!-- ABOUT -->
-		<dialog id="about"  class = "about">
-			<div class = "about-content">
+		<dialog id="about" class="about">
+			<div class="about-content">
 				<span class="close">&times;</span>
 				<b>
 					<center>ABOUT</center>
@@ -65,12 +65,12 @@
 					<ol>
 						<li>Udarstanding the given Gaming flow. </li>
 						<li>Debugging was extremly hard and very not intuitive</li>
-						<li>Gaming functionalities like: creating monsters, start new game, freeze packman before press any
+						<li>Gaming functionalities like: creating monsters, start new game, freeze packman before press
+							any
 							key. </li>
 					</ol>
 				</p>
 				<p>JQuery: We used jquery mainly for the Signup.</p>
-				<br>
 			</div>
 		</dialog>
 
@@ -230,34 +230,43 @@
 		<!-- GAME -->
 		<div id="game" class="changedDivs" style="display: none">
 			<score id="score">
-				<label for="lblScore" style="color: white;">SCORE:</label>
+				<label for="lblScore">SCORE:</label>
 				<input id="lblScore" type="text" />
 			</score>
 			<time id="time">
-				<label for="lblTime" style="color: white;">TIME REMAIN:</label>
+				<label for="lblTime">TIME REMAIN:</label>
 				<input id="lblTime" type="text" />
 			</time>
 			<lives id="lives">
-				<label for="lblLives" style="color: white;">LIVES:</label>
+				<label for="lblLives">LIVES:</label>
 				<input id="lblLives" type="text" />
 			</lives>
-			<div id="user_name_player">
-				<label for="lblUserName" style="color: white;">PACMAN NAME:</label>
-				<input id="lblUserName" type="text" />
+			<p id="user_name_player"></p>
+			<div class="view">
+				<canvas id="canvas" class="game_window" height="720" width="1320"></canvas>
+				<div class="settingWhilePlay">
+					<b style="font-size:30px; color:rgb(178, 216, 90)">SETTINGS</b>
+					<p id="keys"></p>
+					<b>BALLS COLORS</b>					
+					<p id="ball_5">5 points</p>					
+					<p id="ball_15">15 points</p>			
+					<p id="ball_25">25 points</p>			
+					<p id="timeset"></p>				
+					<p id="monsters"></p>
+					<button class="settings_button" style="float: top" onclick="showOnlyGame()"> New game </button>
+				</div>
 			</div>
-			<canvas id="canvas" class="game_window" height="750" width="1350"></canvas>
-			settings
-			<button id="game_button" onclick="showOnlyGame()"> New game </button>
-			<button id="setting_button" onclick="showOnlyGame()"> settings </button>
 
 		</div>
 	</content>
 
 	<footer id="footer">
-		<div>Contact Us! </div>
+
+		<div class="footer">Contact Us! </div>
 		<div class="footer">Roi: kroi@post.bgu.ac.il</div>
 		<div class="footer">Michal: tmichal@post.bgu.ac.il</div>
-	</footer>
+
+	</foofooterter>
 
 </body>
 

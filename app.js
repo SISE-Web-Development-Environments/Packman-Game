@@ -21,7 +21,7 @@ let oneTime;
 let isPaused;
 let wasEaten;
 var interval;
-
+let n_monsters;
 
 
 
@@ -38,10 +38,58 @@ function showOnlyGame() {
 	e6.style.display = 'block';
 	var canvas = document.getElementById('canvas');
 	context = canvas.getContext("2d");
+	getUserSettings();
 	Start();
 }
 
-function Start() {
+function getUserSettings(){
+	let key_up = String.fromCharCode(sessionStorage.getItem("key_up"));
+	if(key_up=="&"){
+		key_up = "&#9650";
+	}
+	let key_down = String.fromCharCode(sessionStorage.getItem("key_down"));
+	if(key_down=="("){
+		key_down = "&#9660";
+	}
+	let key_right = String.fromCharCode(sessionStorage.getItem("key_right"));
+	if(key_right=="'"){
+		key_right = "&#9654";
+	}
+	let key_left = String.fromCharCode(sessionStorage.getItem("key_left"));
+	if(key_left=="%"){
+		key_left = "&#9664";
+	}
+	$("#keys").html("")
+	$("#keys").append("<b>DIRECTIONS<b> <br/>");
+	$("#keys").append("UP : " + key_up +  "<br/>");
+	$("#keys").append("DOWN : " + key_down +  "<br/>");
+	$("#keys").append("RIGHT : " + key_right +  "<br/>");
+	$("#keys").append("LEFT : " + key_left +  "<br/>");	
+
+	let low_points_balls_color = sessionStorage.getItem("low_points_balls_color");
+	let medium_points_balls_color = sessionStorage.getItem("medium_points_balls_color");
+	let high_points_balls_color = sessionStorage.getItem("high_points_balls_color");	
+	$("#ball_5").css("color",low_points_balls_color);
+	$("#ball_15").css("color", medium_points_balls_color);
+	$("#ball_25").css("color", high_points_balls_color);	
+	
+	let duration = sessionStorage.getItem("game_duration");
+	$("#timeset").html("");
+	$("#timeset").append("<b>TIME FOR GAME<b> <br/>");
+	$("#timeset").append(duration + " seconds");
+
+	let amount_monsters = sessionStorage.getItem("n_monsters");
+	$("#monsters").html("")
+	$("#monsters").append("<b>AMOUNT OF MONSTERS<b> <br/>");
+	$("#monsters").append(amount_monsters + " monsters");
+
+	$("#user_name_player").html("");
+	$("#user_name_player").append("User Name:  " + sessionStorage.getItem("user_name"));
+
+
+}
+
+function Start() {	
 	window.clearInterval(interval);
 	board = new Array();
 	m_board = new Array();
@@ -54,6 +102,7 @@ function Start() {
 	var medium_points_balls_remain = food_remain * 0.3;
 	var high_points_balls_remain = food_remain * 0.1;
 	oneTime = true;
+	isPaused = true;
 	wasEaten = false;
 	coinTaken = false;
 	pacPosition = "R";
@@ -62,35 +111,38 @@ function Start() {
 		m_board[i] = new Array();
 		for (var j = 0; j < 12; j++) {
 			//monsters
-			n_monsters = sessionStorage.getItem("n_monsters");//string or int?
+			n_monsters = sessionStorage.getItem("n_monsters");
 
 			if (i == 1 && j == 1) {
 				monstersLocations = new Array();
 				monstersLocations[0] = new Array();
-				monstersLocations[0][0] = i
-				monstersLocations[0][1] = j
+				monstersLocations[0][0] = i;
+				monstersLocations[0][1] = j;
 				m_board[i][j] = 3.1;
-
+				
 			}
 			else if (i == 1 && j == 10 && n_monsters > 1) {
 				m_board[i][j] = 3.2;
 				monstersLocations[1] = new Array();
-				monstersLocations[1][0] = i
-				monstersLocations[1][1] = j
-					;
+				monstersLocations[1][0] = i;
+				monstersLocations[1][1] = j;
+				
+					
 			}
 			else if (i == 20 && j == 1 && n_monsters > 2) {
 				m_board[i][j] = 3.3;
 				monstersLocations[2] = new Array();
-				monstersLocations[2][0] = i
-				monstersLocations[2][1] = j
-					;
+				monstersLocations[2][0] = i;
+				monstersLocations[2][1] = j;
+			
+					
 			}
 			else if (i == 20 && j == 10 && n_monsters > 3) {
 				m_board[i][j] = 3.4;
 				monstersLocations[3] = new Array();
-				monstersLocations[3][0] = i
-				monstersLocations[3][1] = j
+				monstersLocations[3][0] = i;
+				monstersLocations[3][1] = j;
+				
 
 			}
 			else {
@@ -323,8 +375,7 @@ function Draw() {
 		var currentTime = new Date();
 		time_elapsed = sessionStorage.getItem("game_duration") - ((currentTime - start_time) / 1000);
 	}
-	lblTime.value = Math.floor(time_elapsed);
-	lblUserName.value = sessionStorage.getItem("user_name");
+	lblTime.value = Math.floor(time_elapsed);	
 	lblLives.value = lives;
 
 	if (wasEaten) {

@@ -4,6 +4,7 @@
 }
 #body{
     background-color: darkgreen ;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 #header{
     background-color:darkgreen ;
@@ -126,8 +127,8 @@
     background-color: rgb(78, 179, 78);
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
-    margin: auto;
-    padding: 0%;
+    margin: auto;   
+    padding: 10px;
 }
 
 .close {
@@ -138,7 +139,7 @@
   }
 .close:hover,
 .close:focus {
-  color: rgb(88, 11, 11);
+  color: rgb(172, 16, 16);
   text-decoration: none;
   cursor: pointer;
 }
@@ -165,27 +166,45 @@
 .settings_button:hover {
     background-color: rgb(244, 247, 239);  
 }
-#game
-{
-    background-color: black;
-    
+
+#game{
+    color: rgb(215, 229, 182) ;
 }
+
+.view{
+    float: left;
+   
+}
+
 .game_window{
     width:  80%;
     height:  80%;
+    float: left;
+    background-color: black;
+    padding: 0%;
 }
+
+.settingWhilePlay{   
+    font-size: 20px;
+     text-align: center;
+}
+
+
+
 
 #footer{
     background-color:darkgreen ;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
-    color: azure;
-    display: flex;
+    color: azure;   
     justify-content: left;
+    position: relative;
+    margin-top: -1px;
 }
 
 .footer{
     padding-right: 12px;
     padding-left: 12px;
+    float: left;    
 }
 
