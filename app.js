@@ -371,10 +371,10 @@ function GetKeyPressed() {
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
-	if ($('#game').is(':visible')) {
+	// if ($('#game').is(':visible')) {
 		var currentTime = new Date();
 		time_elapsed = sessionStorage.getItem("game_duration") - ((currentTime - start_time) / 1000);
-	}
+	// }
 	lblTime.value = Math.floor(time_elapsed);	
 	lblLives.value = lives;
 
