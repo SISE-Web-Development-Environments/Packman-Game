@@ -11,6 +11,7 @@ function showOnlyLogin() {
 	e5.style.display = 'none';
 	var e6 = document.getElementById("game");
 	e6.style.display = 'none';
+	myMusic.pause();
 	
 }
 

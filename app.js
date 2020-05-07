@@ -16,6 +16,10 @@ let pink_monster = new Image();
 let grey_monster = new Image();
 let funny_monster = new Image();
 let pacPosition;
+let clock = new Image();
+let clock_display = false;
+let myMusic = new Audio();
+var game_duration;
 
 // $(document).ready(function() {
 // 	context = canvas.getContext("2d");
@@ -37,12 +41,21 @@ function showOnlyGame() {
 	e6.style.display = 'block';
 	var canvas = document.getElementById('canvas');
 	context = canvas.getContext("2d");	
+
 	Start();
 }
 
 function Start() {
 	board = new Array();
 	m_board = new Array();
+	game_duration = sessionStorage.getItem("game_duration")
+
+	myMusicSrc = document.createElement("source");
+    myMusicSrc.type = "audio/mpeg";
+    myMusicSrc.src = "resource//song.mp3";
+    myMusic.appendChild(myMusicSrc);
+	myMusic.play();
+      
 	score = 0;
 	lives = 5;
 	pac_color = "yellow";
@@ -296,6 +309,7 @@ function Draw() {
 	lblLives.value = lives;
 
 	pac.src = "resource\\pacman_" + pacPosition + ".png";
+	clock.src = "resource\\clock.png";
 	for (var i = 0; i < 22; i++) {
 		for (var j = 0; j < 12; j++) {
 			var center = new Object();
@@ -335,15 +349,19 @@ function Draw() {
 			} else if (board[i][j] == 4.1) {
 				context.beginPath();
 				context.rect(center.x - 15, center.y - 15, 60, 60);
-				context.fillStyle = "blue"; //color
+				context.fillStyle = "darkgreen"; //color
 				context.fill();
 			}
 			//row wall
 			else if (board[i][j] == 4.2) {
 				context.beginPath();
 				context.rect(center.x - 15, center.y - 15, 30, 30);
-				context.fillStyle = "#003366"; //color
+				context.fillStyle = "#6e9e6e"; //color
 				context.fill();
+			}
+			//clock 
+			else if (board[i][j] == 1.4){
+				context.drawImage(clock, center.x - 15, center.y - 15);
 			}
 		}
 	}
@@ -421,9 +439,12 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] == 1.3) {
 		score = score + 25;
 	}
+	if (board[shape.i][shape.j] == 1.4 ){
+		game_duration = game_duration * 2;  
+	}
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
-	time_elapsed = sessionStorage.getItem("game_duration") - ((currentTime - start_time) / 1000);
+	time_elapsed = game_duration - ((currentTime - start_time) / 1000);
 
 	//  if (score >= 20 && time_elapsed <= 10) {
 	//  	pac_color = "green";
@@ -447,7 +468,7 @@ function UpdatePosition() {
 	if(lives==0){
 		
 	}
-
+	
 	if (time_elapsed <= 0) {
 		window.clearInterval(interval);
 		if (score < 100) {
@@ -456,8 +477,14 @@ function UpdatePosition() {
 		else {
 			window.alert("Winner!!!");
 		}
+		
 		showOnlyGame();
 	} else {
+		if (time_elapsed <= 50 && clock_display==false){
+			var emptyCell = findRandomEmptyCell(board);
+			board[emptyCell[0]][emptyCell[1]] = 1.4; //clock
+			clock_display = true;
+		}
 		Draw();
 		UpdateMonstersPosition();
 	}

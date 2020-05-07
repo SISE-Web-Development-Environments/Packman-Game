@@ -32,6 +32,7 @@ function showOnlySignup() {
 	e5.style.display = 'none';
 	var e6 = document.getElementById("game");
 	e6.style.display = 'none';
+	myMusic.pause();
 }
 
 
@@ -85,6 +86,7 @@ function showOnlySettings() {
 	e5.style.display = 'block';
 	var e6 = document.getElementById("game");
 	e6.style.display = 'none';	
+	myMusic.pause();
 }
 
  function setKeyUp(event){
