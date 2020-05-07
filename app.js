@@ -601,6 +601,7 @@ function UpdatePosition() {
 					window.alert("You have been eaten")
 					if (lives <= 0) {
 						window.clearInterval(interval);
+						myMusic.pause();
 						window.alert("Loser!!!");
 						showOnlyGame();
 					}
@@ -609,12 +610,13 @@ function UpdatePosition() {
 				if (time_elapsed <= 0) {
 					window.clearInterval(interval);
 					if (score < 100) {
+						myMusic.pause();
 						window.alert("You are better than " + score + " points!");
 					}
 					else {
+						myMusic.pause();
 						window.alert("Winner!!!");
 					}
-
 					showOnlyGame();
 				} else {
 					if (time_elapsed <= 50 && clock_display==false){
