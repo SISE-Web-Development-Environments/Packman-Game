@@ -13,11 +13,11 @@
 
 </head>
 
-<body id="body" onkeydown="setPausedFalse()">
-
+<body id="body" onkeydown="setPausedFalse()">	
+			
 	<header id="header">
 
-		<div ><img src="resource//logo.png"></div>
+		<div><img src="resource//logo.png"></div>
 		<div class="header" style="color: rgb(178, 216, 90) ; font-size: 40px"> PACMAN
 			<div class="header" style="color: azure; font-size: 10px">
 				Developed by Roi Katz & Michal Talmor
@@ -25,9 +25,6 @@
 		</div>
 
 
-
-
-		<!-- <button id="clear" onclick="clearLocalStorage()"> Clear Local Storage </button> -->
 	</header>
 	<!-- MENU -->
 	<menu id="menu">
@@ -36,10 +33,11 @@
 		<button id="login_button" class="menu_button" onclick="showOnlyLogin()"> Login </button>
 		<button id="about_button" class="menu_button" onclick="showOnlyAbout()"> About </button>
 
-		<!-- <button id="game_button" onclick="showOnlyGame()"> play - just for tests </button> -->
+
 	</menu>
 
 	<content id="content">
+
 		<!-- WELCOME -->
 		<div id="welcome" class="changedDivs" style="display: none">
 			<div style="color: rgb(215, 229, 182) ; text-align:right">בס"ד</div>
@@ -54,6 +52,27 @@
 			</div>
 
 		</div>
+
+		<!-- ABOUT -->
+		<dialog id="about"  class = "about">
+			<div class = "about-content">
+				<span class="close">&times;</span>
+				<b>
+					<center>ABOUT</center>
+				</b>
+				<b>Developers: Roi Katz & Michal Talmor</b>
+				<p>Our main difficulties:
+					<ol>
+						<li>Udarstanding the given Gaming flow. </li>
+						<li>Debugging was extremly hard and very not intuitive</li>
+						<li>Gaming functionalities like: creating monsters, start new game, freeze packman before press any
+							key. </li>
+					</ol>
+				</p>
+				<p>JQuery: We used jquery mainly for the Signup.</p>
+				<br>
+			</div>
+		</dialog>
 
 		<!-- SIGNUP -->
 
@@ -208,14 +227,6 @@
 			</div>
 		</div>
 
-		<!-- ABOUT -->
-		<div id="about" class="changedDivs" style="display: none">
-			<div style="color: rgb(215, 229, 182) ; font-size: 100px; text-align:center; stroke: black;">
-				ABOUT
-			</div>
-
-		</div>
-
 		<!-- GAME -->
 		<div id="game" class="changedDivs" style="display: none">
 			<score id="score">
@@ -243,10 +254,11 @@
 	</content>
 
 	<footer id="footer">
-		<div >Contact Us! </div>
-		<div class = "footer">Roi: kroi@post.bgu.ac.il</div>
-		<div class = "footer">Michal: tmichal@post.bgu.ac.il</div>		
+		<div>Contact Us! </div>
+		<div class="footer">Roi: kroi@post.bgu.ac.il</div>
+		<div class="footer">Michal: tmichal@post.bgu.ac.il</div>
 	</footer>
+
 </body>
 
 </html>

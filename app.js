@@ -10,7 +10,6 @@ var score;
 var lives;
 var start_time;
 var time_elapsed;
-var interval;
 let pac = new Image();
 let white_monster = new Image();
 let pink_monster = new Image();
@@ -21,11 +20,10 @@ let pacPosition;
 let oneTime;
 let isPaused;
 let wasEaten;
+var interval;
 
-// $(document).ready(function() {
-// 	context = canvas.getContext("2d");
-// 	Start();
-// });
+
+
 
 function showOnlyGame() {
 	var e1 = document.getElementById("welcome");
@@ -34,8 +32,6 @@ function showOnlyGame() {
 	e2.style.display = 'none';
 	var e3 = document.getElementById("login");
 	e3.style.display = 'none';
-	var e4 = document.getElementById("about");
-	e4.style.display = 'none';
 	var e5 = document.getElementById("settings");
 	e5.style.display = 'none';
 	var e6 = document.getElementById("game");
@@ -437,128 +433,129 @@ function setPausedFalse() {
 }
 
 function UpdatePosition() {
-
-	if (!isPaused) {
-		if (wasEaten) {
-			board[shape.i][shape.j] = 0
-			var emptyCell = findRandomEmptyCell(board);
-			shape.i = emptyCell[0];
-			shape.j = emptyCell[1];
-			board[emptyCell[0]][emptyCell[1]] = 2;
-			Draw();
-			UpdateMonstersPosition();
-		}
-		else {
-
-			board[shape.i][shape.j] = 0;
-			var x = GetKeyPressed();
-			if (x == 1) {
-				pacPosition = "U";
-				if (shape.j > 0 && board[shape.i][shape.j - 1] != 4.1 && shape.j > 0 && board[shape.i][shape.j - 1] != 4.2) {
-					shape.j--;
-				}
-			}
-			if (x == 2) {
-				pacPosition = "D";
-				if (shape.j < 11 && board[shape.i][shape.j + 1] != 4.1 && (shape.j < 11 && board[shape.i][shape.j + 1] != 4.2)) {
-					shape.j++;
-				}
-			}
-			if (x == 3) {
-				pacPosition = "L";
-				if (shape.i > 0 && board[shape.i - 1][shape.j] != 4.1 && shape.i > 0 && board[shape.i - 1][shape.j] != 4.2) {
-					shape.i--;
-				}
-			}
-			if (x == 4) {
-				pacPosition = "R";
-				if (shape.i < 21 && board[shape.i + 1][shape.j] != 4.1 && shape.i < 21 && board[shape.i + 1][shape.j] != 4.2) {
-					shape.i++;
-				}
-			}
-			if (board[shape.i][shape.j] == 1.1) {
-				score = score + 5;
-			}
-			if (board[shape.i][shape.j] == 1.2) {
-				score = score + 15;
-			}
-			if (board[shape.i][shape.j] == 1.3) {
-				score = score + 25;
-			}			
-			if (c_board[shape.i][shape.j] == 1) {
-				score = score + 50;
-				coinTaken = true;
-			}
-			
-			board[shape.i][shape.j] = 2;
-			if(!coinTaken){
-				updateCoinPosition();
-			}
-			else{
-				x = coinShape.i;
-				y = coinShape.j;
-				c_board[x][y]=0;
-			}
-			
-
-			if ($('#game').is(':visible')) {
-				var currentTime = new Date();
-				time_elapsed = sessionStorage.getItem("game_duration") - ((currentTime - start_time) / 1000);
-			}
-			let m = m_board[shape.i][shape.j];
-			if(m == 3.1 || m == 3.2 || m == 3.3 || m == 3.4){
-				if (m_board[shape.i][shape.j] == 3.1) {
-					lives--;
-					score -= 10;					
-				}
-				else if (m_board[shape.i][shape.j] == 3.2) {
-					lives--;
-					score -= 20;					
-				}
-				else if (m_board[shape.i][shape.j] == 3.3) {
-					lives -= 2;
-					score -= 30;					
-				}
-				else if (m_board[shape.i][shape.j] == 3.4) {
-					lives -= 2;
-					score -= 40;					
-				}
-				wasEaten = true;
-				window.alert("You have been eaten")
-				if (lives <= 0) {
-					window.clearInterval(interval);
-					window.alert("Loser!!!");
-					showOnlyGame();
-				}
-			}		
-			
-
-			if (time_elapsed <= 0) {
-				window.clearInterval(interval);
-				if (score < 100) {
-					window.alert("You are better than " + score + " points!");
-				}
-				else {
-					window.alert("Winner!!!");
-				}
-				
-				showOnlyGame();
-			} else {
-
+	if ($('#game').is(':hidden')) {
+		window.clearInterval(interval);
+	}
+	else {
+		if (!isPaused) {
+			if (wasEaten) {
+				board[shape.i][shape.j] = 0
+				var emptyCell = findRandomEmptyCell(board);
+				shape.i = emptyCell[0];
+				shape.j = emptyCell[1];
+				board[emptyCell[0]][emptyCell[1]] = 2;
 				Draw();
 				UpdateMonstersPosition();
 			}
-		}
+			else {
 
-	}
-	else {//if isPaused: continue drawing but not update location - NECCESSARY FOR IMAGE!
-		Draw();
-		UpdateMonstersPosition();
+				board[shape.i][shape.j] = 0;
+				var x = GetKeyPressed();
+				if (x == 1) {
+					pacPosition = "U";
+					if (shape.j > 0 && board[shape.i][shape.j - 1] != 4.1 && shape.j > 0 && board[shape.i][shape.j - 1] != 4.2) {
+						shape.j--;
+					}
+				}
+				if (x == 2) {
+					pacPosition = "D";
+					if (shape.j < 11 && board[shape.i][shape.j + 1] != 4.1 && (shape.j < 11 && board[shape.i][shape.j + 1] != 4.2)) {
+						shape.j++;
+					}
+				}
+				if (x == 3) {
+					pacPosition = "L";
+					if (shape.i > 0 && board[shape.i - 1][shape.j] != 4.1 && shape.i > 0 && board[shape.i - 1][shape.j] != 4.2) {
+						shape.i--;
+					}
+				}
+				if (x == 4) {
+					pacPosition = "R";
+					if (shape.i < 21 && board[shape.i + 1][shape.j] != 4.1 && shape.i < 21 && board[shape.i + 1][shape.j] != 4.2) {
+						shape.i++;
+					}
+				}
+				if (board[shape.i][shape.j] == 1.1) {
+					score = score + 5;
+				}
+				if (board[shape.i][shape.j] == 1.2) {
+					score = score + 15;
+				}
+				if (board[shape.i][shape.j] == 1.3) {
+					score = score + 25;
+				}
+				if (c_board[shape.i][shape.j] == 1) {
+					score = score + 50;
+					coinTaken = true;
+				}
+
+				board[shape.i][shape.j] = 2;
+				if (!coinTaken) {
+					updateCoinPosition();
+				}
+				else {
+					x = coinShape.i;
+					y = coinShape.j;
+					c_board[x][y] = 0;
+				}
+
+
+
+				var currentTime = new Date();
+				time_elapsed = sessionStorage.getItem("game_duration") - ((currentTime - start_time) / 1000);
+
+				let m = m_board[shape.i][shape.j];
+				if (m == 3.1 || m == 3.2 || m == 3.3 || m == 3.4) {
+					if (m_board[shape.i][shape.j] == 3.1) {
+						lives--;
+						score -= 10;
+					}
+					else if (m_board[shape.i][shape.j] == 3.2) {
+						lives--;
+						score -= 20;
+					}
+					else if (m_board[shape.i][shape.j] == 3.3) {
+						lives -= 2;
+						score -= 30;
+					}
+					else if (m_board[shape.i][shape.j] == 3.4) {
+						lives -= 2;
+						score -= 40;
+					}
+					wasEaten = true;
+					window.alert("You have been eaten")
+					if (lives <= 0) {
+						window.clearInterval(interval);
+						window.alert("Loser!!!");
+						showOnlyGame();
+					}
+				}
+
+				if (time_elapsed <= 0) {
+					window.clearInterval(interval);
+					if (score < 100) {
+						window.alert("You are better than " + score + " points!");
+					}
+					else {
+						window.alert("Winner!!!");
+					}
+
+					showOnlyGame();
+				} else {
+					Draw();
+					UpdateMonstersPosition();
+				}
+			}
+		}
+		else {//if isPaused: continue drawing but not update location - NECCESSARY FOR IMAGE!
+			Draw();
+			UpdateMonstersPosition();
+		}
 	}
 }
 
 function updateCoinPosition() {
-	
+
 	c_board[coinShape.i][coinShape.j] = 0;
 	let random = Math.random();
 	if (random > 0.75) {				//move up or down
@@ -566,17 +563,17 @@ function updateCoinPosition() {
 			coinShape.i++;
 		}
 	}
-	else if (random > 0.5 && random <= 0.75){
+	else if (random > 0.5 && random <= 0.75) {
 		if (coinShape.i > 0 && board[coinShape.i - 1][coinShape.j] != 4.1 && coinShape.i > 0 && board[coinShape.i - 1][coinShape.j] != 4.2) {
 			coinShape.i--;
 		}
 	}
-	else if (random > 0.25 && random <= 0.5){
+	else if (random > 0.25 && random <= 0.5) {
 		if (coinShape.j < 11 && board[coinShape.i][coinShape.j + 1] != 4.1 && (coinShape.j < 11 && board[coinShape.i][coinShape.j + 1] != 4.2)) {
 			coinShape.j++;
 		}
 	}
-	else{
+	else {
 		if (coinShape.j > 0 && board[coinShape.i][coinShape.j - 1] != 4.1 && coinShape.j > 0 && board[coinShape.i][coinShape.j - 1] != 4.2) {
 			coinShape.j--;
 		}

@@ -117,13 +117,30 @@
     color: rgb(5, 68, 5);   
 }
 
-#about
+.about
 {
-    background-image: url('welcome.jpg');
-	background-repeat: no-repeat;	
-    /*background-size: 100% 100%;*/
+    padding: 0%;    
+}
+.about-content
+{
+    background-color: rgb(78, 179, 78);
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
+    margin: auto;
+    padding: 0%;
+}
+
+.close {
+    color: #000;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+.close:hover,
+.close:focus {
+  color: rgb(88, 11, 11);
+  text-decoration: none;
+  cursor: pointer;
 }
 
 #settings
