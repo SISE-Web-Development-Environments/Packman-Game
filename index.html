@@ -4,33 +4,40 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script src="./jquery-3.4.1.slim.min.js"></script>
-	
+
 	<script type="text/javascript" src="./app.js"></script>
 	<script type="text/javascript" src="./welcome.js"></script>
-	<script type="text/javascript" src="./signup.js"></script>
 	<script type="text/javascript" src="./login.js"></script>
 	<script type="text/javascript" src="./about.js"></script>
 	<script type="text/javascript" src="./settings.js"></script>
 
 </head>
 
-<body id="body">
-	
-	<header id="header" style="color: rgb(178, 216, 90) ; font-size: 50px; text-align:left">
-			FUCKING PACMAN
-		<button id="clear" onclick="clearLocalStorage()"> Clear Local Storage </button>
+<body id="body" onkeydown="setPausedFalse()">
+
+	<header id="header">
+
+		<div><img src="resource//logo.png"></div>
+		<div class="header" style="color: rgb(178, 216, 90) ; font-size: 40px"> PACMAN
+			<div class="header" style="color: azure; font-size: 10px">
+				Developed by Roi Katz & Michal Talmor
+			</div>
+		</div>
+
+
 	</header>
 	<!-- MENU -->
 	<menu id="menu">
-		<button id="welcome_button" class="menu_button" onclick="showOnlyWelcome()"> welcome </button>
-		<button id="signup_button" class="menu_button" onclick="showOnlySignup()"> signup </button>
-		<button id="login_button" class="menu_button" onclick="showOnlyLogin()"> login </button>
-		<button id="about_button" class="menu_button" onclick="showOnlyAbout()"> about </button>
+		<button id="welcome_button" class="menu_button" onclick="showOnlyWelcome()"> Welcome </button>
+		<button id="signup_button" class="menu_button" onclick="showOnlySignup()"> Signup </button>
+		<button id="login_button" class="menu_button" onclick="showOnlyLogin()"> Login </button>
+		<button id="about_button" class="menu_button" onclick="showOnlyAbout()"> About </button>
 
-		<button id="game_button" onclick="showOnlyGame()"> play - just for tests </button>
+
 	</menu>
-	
-	<content>
+
+	<content id="content">
+
 		<!-- WELCOME -->
 		<div id="welcome" class="changedDivs" style="display: none">
 			<div style="color: rgb(215, 229, 182) ; text-align:right">בס"ד</div>
@@ -46,23 +53,47 @@
 
 		</div>
 
+		<!-- ABOUT -->
+		<dialog id="about" class="about">
+			<div class="about-content">
+				<span class="close">&times;</span>
+				<b>
+					<center>ABOUT</center>
+				</b>
+				<b>Developers: Roi Katz & Michal Talmor</b>
+				<p>Our main difficulties:
+					<ol>
+						<li>Udarstanding the given Gaming flow. </li>
+						<li>Debugging was extremly hard and very not intuitive</li>
+						<li>Gaming functionalities like: creating monsters, start new game, freeze packman before press
+							any
+							key. </li>
+					</ol>
+				</p>
+				<p>JQuery: We used jquery mainly for the Signup, but also for showing the settings during the game.</p>
+			</div>
+		</dialog>
+
 		<!-- SIGNUP -->
-		
+
 		<div id="signup" class="changedDivs" style="display: none">
 			<div style="color: rgb(215, 229, 182) ; font-size: 100px; text-align:center">
 				SIGNUP
 			</div>
-			<br/>
-			<div >
-				<label for="user_name" style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">User Name:</label>
+			<br />
+			<div>
+				<label for="user_name" style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">User
+					Name:</label>
 				<input type="text" id="user_name" name="user_name" />
 			</div>
 			<div>
-				<label for="password" style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">Password:</label>
+				<label for="password"
+					style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">Password:</label>
 				<input type="password" id="password" name="password" />
 			</div>
 			<div>
-				<label for="full_name" style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">Full Name:</label>
+				<label for="full_name" style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">Full
+					Name:</label>
 				<input type="text" id="full_name" name="full_name" />
 			</div>
 			<div>
@@ -71,18 +102,20 @@
 			</div>
 
 			<div>
-				<label for="birth_date" style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">Birth date:</label>
+				<label for="birth_date" style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">Birth
+					date:</label>
 				<input type="date" id="birth_date" value="1994-01-01" min="1930-01-01" max="2020-01-01">
 			</div>
-			<br>
+			<div style="height: 150px;"></div>
 			<div style=" text-align:center">
-				<div id="success" style="font-size: 50px; color: rgb(215, 229, 182)"> Fill details before you continue </div>
-				<button id="submit_button" class="submit_button" onclick="submit()"> submit </button>
+				<div id="success" style="font-size: 50px; color: rgb(215, 229, 182)"> Fill details before you continue
+				</div>
 			</div>
-			
-			
 
-			<button id="setting_button" onclick="showOnlySettings()"> settings </button>
+			<div style=" text-align:center">
+				<button id="submit_button" class="submit_button" onclick="submit()"> Submit </button>
+				<button id="setting_button" class="submit_button" onclick="showOnlySettings()" disabled> Next </button>
+			</div>
 
 		</div>
 
@@ -92,43 +125,52 @@
 				LOGIN
 			</div>
 			<div>
-				<label for="login_user_name" style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">User Name:</label>
+				<label for="login_user_name" style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">User
+					Name:</label>
 				<input type="text" id="login_user_name" />
 			</div>
 			<div>
-				<label for="login_password" style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">Password:</label>
+				<label for="login_password"
+					style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">Password:</label>
 				<input type="password" id="login_password" />
 			</div>
 			<button class="login_start_button" onclick="login_start()"> Log In </button>
+			<div style="height: 280px;"></div>
 		</div>
 
 		<!-- SETTING -->
 		<div id="settings" class="changedDivs" style="display: none">
 			<div style="color: rgb(215, 229, 182) ; font-size: 100px; text-align:center; stroke: black;">
-				settings
+				Settings
 			</div>
 			<div>
-				<div style="color: rgb(215, 229, 182) ; font-size: 30px; text-align:start">You can choose game buttons by defult:</div>
+				<div style="color: rgb(215, 229, 182) ; font-size: 30px; text-align:start">You can choose game buttons
+					by defult:</div>
 				<button class="settings_button" id="random_settings_button" onclick="randomSettings()"> Random </button>
 			</div>
 			<br />
 			<div>
-				<div style="color: rgb(215, 229, 182) ; font-size: 30px; text-align:start">You can choose game buttons by yourself:</div>
-				<br/>
+				<div style="color: rgb(215, 229, 182) ; font-size: 30px; text-align:start">You can choose game buttons
+					by yourself:</div>
+				<br />
 				<div>
-					<label for="key_up" style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">UP:</label>
+					<label for="key_up"
+						style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">UP:</label>
 					<input type="text" onkeydown="setKeyUp(event)" id="key_up">
 				</div>
 				<div>
-					<label for="key_down" style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">DOWN:</label>
+					<label for="key_down"
+						style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">DOWN:</label>
 					<input type="text" onkeydown="setKeyDown(event)" id="key_down">
 				</div>
 				<div>
-					<label for="key_left" style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">LEFT:</label>
+					<label for="key_left"
+						style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">LEFT:</label>
 					<input type="text" onkeydown="setKeyLeft(event)" id="key_left">
 				</div>
 				<div>
-					<label for="key_right" style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">RIGHT:</label>
+					<label for="key_right"
+						style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">RIGHT:</label>
 					<input type="text" onkeydown="setKeyRight(event)" id="key_right">
 				</div>
 			</div>
@@ -148,7 +190,8 @@
 					<input type="color" id="low_points_balls_color" value="#00cc00">
 				</div>
 				<div>
-					<label for="medium_points_balls_color" style="color: azure; font-size: 15px;">15 points balls:</label>
+					<label for="medium_points_balls_color" style="color: azure; font-size: 15px;">15 points
+						balls:</label>
 					<input type="color" id="medium_points_balls_color" value="#0066ff">
 				</div>
 				<div>
@@ -160,11 +203,12 @@
 			<div>
 				<div style="color: rgb(215, 229, 182) ; font-size: 20px; text-align:start">Coose game duration:</div>
 				<div>
-					<label for="game_duration" style="color: azure; font-size: 15px;">time in seconds: (up than 60)</label>
+					<label for="game_duration" style="color: azure; font-size: 15px;">time in seconds: (up than
+						60)</label>
 					<input type="number" id="game_duration" min="60" value="60">
 				</div>
 			</div>
-			<br/>
+			<br />
 			<div>
 				<div style="color: #d7e5b6 ; font-size: 20px; text-align:start">Coose monsters amount:</div>
 				<div>
@@ -175,50 +219,55 @@
 			<br />
 			<div style=" text-align:center">
 				<button class="settings_button" id="save_settings_button" onclick="saveSettings()"> Save </button>
-				<button class="settings_button" id="display_settings" onclick="displaySettings()"> display settings </button>
+				<button class="settings_button" id="display_settings" onclick="displaySettings()"> display settings
+				</button>
 			</div>
 			<div style=" text-align:center">
-				<button class="settings_button" id="game_button" onclick="showOnlyGame()" > play </button>
+				<button class="settings_button" id="game_button" onclick="showOnlyGame()"> play </button>
 			</div>
-		</div>
-
-		<!-- ABOUT -->
-		<div id="about" class="changedDivs" style="display: none">
-			<div style="color: rgb(215, 229, 182) ; font-size: 100px; text-align:center; stroke: black;">
-				ABOUT
-			</div>
-
 		</div>
 
 		<!-- GAME -->
 		<div id="game" class="changedDivs" style="display: none">
 			<score id="score">
-				<label for="lblScore" style="color: #d7e5b6;">SCORE:</label>
+				<label for="lblScore">SCORE:</label>
 				<input id="lblScore" type="text" />
 			</score>
 			<time id="time">
-				<label for="lblTime" style="color: #d7e5b6;">TIME REMAIN:</label>
+				<label for="lblTime">TIME REMAIN:</label>
 				<input id="lblTime" type="text" />
 			</time>
 			<lives id="lives">
-				<label for="lblLives" style="color: #d7e5b6;">LIVES:</label>
+				<label for="lblLives">LIVES:</label>
 				<input id="lblLives" type="text" />
 			</lives>
-			<div id="user_name_player">
-				<label for="lblUserName" style="color: #d7e5b6;">PACMAN NAME:</label>
-				<input id="lblUserName" type="text" />
+			<p id="user_name_player"></p>
+			<div class="view">
+				<canvas id="canvas" class="game_window" height="720" width="1320"></canvas>
+				<div class="settingWhilePlay">
+					<b style="font-size:30px; color:rgb(178, 216, 90)">SETTINGS</b>
+					<p id="keys"></p>
+					<b>BALLS COLORS</b>					
+					<p id="ball_5">5 points</p>					
+					<p id="ball_15">15 points</p>			
+					<p id="ball_25">25 points</p>			
+					<p id="timeset"></p>				
+					<p id="monsters"></p>
+					<button class="settings_button" style="float: top" onclick="showOnlyGame()"> New game </button>
+				</div>
 			</div>
-			<canvas id="canvas" class="game_window" height="750" width="1350"></canvas>	
-			settings	
-			<button id="game_button" onclick="showOnlyGame()"> New game </button>
-			<button id="setting_button" onclick="showOnlySettings()"> settings </button>
 
 		</div>
 	</content>
-	
-	<footer id="footer" style="color: azure;">
-		Developed by Roi Katz & Michal Talmor
-	</footer>
+
+	<footer id="footer">
+
+		<div class="footer">Contact Us! </div>
+		<div class="footer">Roi: kroi@post.bgu.ac.il</div>
+		<div class="footer">Michal: tmichal@post.bgu.ac.il</div>
+
+	</foofooterter>
+
 </body>
 
 </html>

@@ -4,12 +4,24 @@
 }
 #body{
     background-color: darkgreen ;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 #header{
     background-color:darkgreen ;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
+    display: flex;
+    justify-content: left;
+   
 }
+.header{
+    padding-right: 12px;
+    padding-left: 12px;
+}
+/* #block1 #block2{
+    display:inline;
+} */
+
 #menu{
     background-color: #6e9e6e;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -29,6 +41,8 @@
 .menu_button:hover {
     background-color: rgb(244, 247, 239);  
 }
+
+
 
 #welcome
 {
@@ -59,7 +73,7 @@
 {
     background-image: url('welcome.jpg');
 	background-repeat: no-repeat;	
-    /*background-size: 100% 100%;*/
+    background-size: 100% 100%;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
 }
@@ -74,24 +88,21 @@
     background-color: rgb(215, 229, 182);
     color: rgb(5, 68, 5);   
 }
-.submit_button:hover {
+.submit_button:hover:enabled {
     background-color: rgb(244, 247, 239);  
 }
-/* label {
-    display: block;
-    font: 1rem 'Fira Sans', sans-serif;
-}
 
-input,
-label {
-    margin: .4rem 0;
-} */
+.submit_button:disabled ,
+    submit_button[disabled]{
+    border: 2px solid rgb(66, 90, 66);
+    color: rgb(66, 90, 66); 
+}
 
 #login
 {
     background-image: url('welcome.jpg');
 	background-repeat: no-repeat;	
-    /*background-size: 100% 100%;*/
+    background-size: 100% 100%;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
 }
@@ -107,13 +118,30 @@ label {
     color: rgb(5, 68, 5);   
 }
 
-#about
+.about
 {
-    background-image: url('welcome.jpg');
-	background-repeat: no-repeat;	
-    /*background-size: 100% 100%;*/
+    padding: 0%;    
+}
+.about-content
+{
+    background-color: rgb(78, 179, 78);
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
+    margin: auto;   
+    padding: 10px;
+}
+
+.close {
+    color: #000;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+.close:hover,
+.close:focus {
+  color: rgb(172, 16, 16);
+  text-decoration: none;
+  cursor: pointer;
 }
 
 #settings
@@ -138,18 +166,45 @@ label {
 .settings_button:hover {
     background-color: rgb(244, 247, 239);  
 }
-#game
-{
-    background-color: black;
-    
+
+#game{
+    color: rgb(215, 229, 182) ;
 }
+
+.view{
+    float: left;
+   
+}
+
 .game_window{
     width:  80%;
     height:  80%;
+    float: left;
+    background-color: black;
+    padding: 0%;
 }
+
+.settingWhilePlay{   
+    font-size: 20px;
+     text-align: center;
+}
+
+
+
+
 #footer{
     background-color:darkgreen ;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
-    
+    color: azure;   
+    justify-content: left;
+    position: relative;
+    margin-top: -1px;
 }
+
+.footer{
+    padding-right: 12px;
+    padding-left: 12px;
+    float: left;    
+}
+

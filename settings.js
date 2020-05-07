@@ -4,9 +4,9 @@ $(document).ready(function() {
 
 let current_user_name;
 
-function clearLocalStorage() {
-	localStorage.clear();
-}
+// function clearLocalStorage() {
+// 	localStorage.clear();
+// }
 /* ---------------- USER P ---------------- */
 function createUserP() {	
 	if(localStorage.getItem("p")==null){
@@ -26,8 +26,6 @@ function showOnlySignup() {
 	e2.style.display = 'block';
 	var e3 = document.getElementById("login");
 	e3.style.display = 'none';
-	var e4 = document.getElementById("about");
-	e4.style.display = 'none';
 	var e5 = document.getElementById("settings");
 	e5.style.display = 'none';
 	var e6 = document.getElementById("game");
@@ -68,6 +66,7 @@ function submit() {
 		current_user_name=	user_name;	
 		$("#success").html("")
 		$("#success").append("Your details have been successfully entered")
+		$("#setting_button").attr("disabled", false);
 	}
 
 }
@@ -80,8 +79,6 @@ function showOnlySettings() {
 	e2.style.display = 'none';
 	var e3 = document.getElementById("login");
 	e3.style.display = 'none';
-	var e4 = document.getElementById("about");
-	e4.style.display = 'none';
 	var e5 = document.getElementById("settings");
 	e5.style.display = 'block';
 	var e6 = document.getElementById("game");
