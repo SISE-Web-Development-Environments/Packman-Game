@@ -17,6 +17,10 @@ let grey_monster = new Image();
 let funny_monster = new Image();
 let fifty_cent = new Image();
 let pacPosition;
+let clock = new Image();
+let clock_display = false;
+let myMusic = new Audio();
+var game_duration;
 let oneTime;
 let isPaused;
 let wasEaten;
@@ -74,6 +78,9 @@ function getUserSettings(){
 	$("#ball_25").css("color", high_points_balls_color);	
 	
 	let duration = sessionStorage.getItem("game_duration");
+	if(duration<60){
+		duration=60;
+	}
 	$("#timeset").html("");
 	$("#timeset").append("<b>TIME FOR GAME<b> <br/>");
 	$("#timeset").append(duration + " seconds");
@@ -93,6 +100,17 @@ function Start() {
 	window.clearInterval(interval);
 	board = new Array();
 	m_board = new Array();
+	game_duration = sessionStorage.getItem("game_duration")
+	if(game_duration<60){
+		game_duration=60;
+	}
+	myMusicSrc = document.createElement("source");
+    myMusicSrc.type = "audio/mpeg";
+    myMusicSrc.src = "resource//song.mp3";
+	myMusic.appendChild(myMusicSrc);
+	myMusic.volume = 0.1;
+	myMusic.play();
+      
 	c_board = new Array();
 	score = 0;
 	lives = 5;
@@ -370,11 +388,9 @@ function GetKeyPressed() {
 
 function Draw() {
 	canvas.width = canvas.width; //clean board
-	lblScore.value = score;
-	// if ($('#game').is(':visible')) {
-		var currentTime = new Date();
-		time_elapsed = sessionStorage.getItem("game_duration") - ((currentTime - start_time) / 1000);
-	// }
+	lblScore.value = score;	
+	var currentTime = new Date();
+	time_elapsed = game_duration - ((currentTime - start_time) / 1000);	
 	lblTime.value = Math.floor(time_elapsed);	
 	lblLives.value = lives;
 
@@ -387,6 +403,7 @@ function Draw() {
 	}
 
 	pac.src = "resource\\pacman_" + pacPosition + ".png";
+	clock.src = "resource\\clock.png";
 	fifty_cent.src = "resource\\50.png";
 	for (var i = 0; i < 22; i++) {
 		for (var j = 0; j < 12; j++) {
@@ -420,7 +437,7 @@ function Draw() {
 			} else if (board[i][j] == 4.1) {
 				context.beginPath();
 				context.rect(center.x - 15, center.y - 15, 60, 60);
-				context.fillStyle = "blue"; //color
+				context.fillStyle = "darkgreen"; //color
 				context.fill();
 			}
 
@@ -428,9 +445,13 @@ function Draw() {
 			//row wall
 			else if (board[i][j] == 4.2) {
 				context.beginPath();
-				context.rect(center.x - 15, center.y - 15, 15, 60);
-				context.fillStyle = "#003366"; //color
+				context.rect(center.x - 15, center.y - 15, 30, 30);
+				context.fillStyle = "#6e9e6e"; //color
 				context.fill();
+			}
+			//clock 
+			else if (board[i][j] == 1.4){
+				context.drawImage(clock, center.x - 15, center.y - 15);
 			}
 			//coin
 			if (c_board[i][j] == 1) {
@@ -539,6 +560,10 @@ function UpdatePosition() {
 					score = score + 50;
 					coinTaken = true;
 				}
+				
+				if (board[shape.i][shape.j] == 1.4 ){
+					game_duration = game_duration * 2;  
+				}
 
 				board[shape.i][shape.j] = 2;
 				if (!coinTaken) {
@@ -551,10 +576,9 @@ function UpdatePosition() {
 				}
 
 
-
 				var currentTime = new Date();
-				time_elapsed = sessionStorage.getItem("game_duration") - ((currentTime - start_time) / 1000);
-
+				time_elapsed = game_duration - ((currentTime - start_time) / 1000);
+			
 				let m = m_board[shape.i][shape.j];
 				if (m == 3.1 || m == 3.2 || m == 3.3 || m == 3.4) {
 					if (m_board[shape.i][shape.j] == 3.1) {
@@ -593,6 +617,11 @@ function UpdatePosition() {
 
 					showOnlyGame();
 				} else {
+					if (time_elapsed <= 50 && clock_display==false){
+						var emptyCell = findRandomEmptyCell(board);
+						board[emptyCell[0]][emptyCell[1]] = 1.4; //clock
+						clock_display = true;
+					}
 					Draw();
 					UpdateMonstersPosition();
 				}
