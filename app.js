@@ -77,10 +77,7 @@ function getUserSettings(){
 	$("#ball_15").css("color", medium_points_balls_color);
 	$("#ball_25").css("color", high_points_balls_color);	
 	
-	let duration = sessionStorage.getItem("game_duration");
-	if(duration<60){
-		duration=60;
-	}
+	let duration = sessionStorage.getItem("game_duration");	
 	$("#timeset").html("");
 	$("#timeset").append("<b>TIME FOR GAME<b> <br/>");
 	$("#timeset").append(duration + " seconds");
@@ -100,10 +97,7 @@ function Start() {
 	window.clearInterval(interval);
 	board = new Array();
 	m_board = new Array();
-	game_duration = sessionStorage.getItem("game_duration")
-	if(game_duration<60){
-		game_duration=60;
-	}
+	game_duration = sessionStorage.getItem("game_duration")	
 	myMusicSrc = document.createElement("source");
     myMusicSrc.type = "audio/mpeg";
     myMusicSrc.src = "resource//song.mp3";

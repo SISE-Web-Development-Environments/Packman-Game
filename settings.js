@@ -112,6 +112,9 @@ function showOnlySettings() {
 	 var medium_points_balls_color = document.getElementById("medium_points_balls_color").value;
 	 var high_points_balls_color = document.getElementById("high_points_balls_color").value;
 	 var game_duration = document.getElementById("game_duration").value;
+	 if(game_duration<60){
+		game_duration=60;
+	 }
 	 var n_monsters = document.getElementById("n_monsters").value;
 
 	 sessionStorage.setItem("balls_amount", balls_amount);
