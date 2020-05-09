@@ -3,6 +3,10 @@ $(document).ready(function() {
 });
 
 let current_user_name;
+let key_up_set = false;
+let key_down_set = false;
+let key_left_set = false;
+let key_right_set = false;
 
 // function clearLocalStorage() {
 // 	localStorage.clear();
@@ -88,22 +92,26 @@ function showOnlySettings() {
 
  function setKeyUp(event){
 	var key_up = event.keyCode;
-    sessionStorage.setItem("key_up", key_up);
+	sessionStorage.setItem("key_up", key_up);
+	key_up_set = true;
 	alert("up button select");
  } 
  function setKeyDown(event){
 	var key_down = event.keyCode;
 	sessionStorage.setItem("key_down", key_down);
+	key_down_set = true;
   	alert("down button select");
  } 
  function setKeyLeft(event){
 	var key_left = event.keyCode;
 	sessionStorage.setItem("key_left", key_left);
+	key_left_set = true;
   	alert("left button select");
  } 
  function setKeyRight(event){
 	var key_right = event.keyCode;
 	sessionStorage.setItem("key_right", key_right);
+	key_right_set = true;
   	alert("right button select");
  } 
  function saveSettings(){
@@ -114,24 +122,39 @@ function showOnlySettings() {
 	 var game_duration = document.getElementById("game_duration").value;
 	 var n_monsters = document.getElementById("n_monsters").value;
 
-	 sessionStorage.setItem("balls_amount", balls_amount);
-	 sessionStorage.setItem("low_points_balls_color", low_points_balls_color);
-	 sessionStorage.setItem("medium_points_balls_color", medium_points_balls_color);
-	 sessionStorage.setItem("high_points_balls_color", high_points_balls_color);
-	 sessionStorage.setItem("game_duration", game_duration);
-	 sessionStorage.setItem("n_monsters", n_monsters);
-	 
-	 //save settings in local storage
-	 var key_up = sessionStorage.getItem("key_up");
-	 var key_down =sessionStorage.getItem("key_down");
-	 var key_left =sessionStorage.getItem("key_left");
-	 var key_right =sessionStorage.getItem("key_right");
+	 if (key_down_set == false || key_up_set == false || key_left_set ==false || key_right_set == false){
+		 alert("Please choose directions buttons")
+	 }
+	 else if (balls_amount < 50 || balls_amount > 90){
+		alert("Balls amount should be between 50 to 90")
+	}
+	 else if (game_duration < 60){
+		alert("Game duration should be up than 60");
+	}
+	 else if (n_monsters < 1 || n_monsters > 4){
+		 alert("monsters amount shold be between 1 to 4")
+	 }
+	 else{
+		sessionStorage.setItem("balls_amount", balls_amount);
+		sessionStorage.setItem("low_points_balls_color", low_points_balls_color);
+		sessionStorage.setItem("medium_points_balls_color", medium_points_balls_color);
+		sessionStorage.setItem("high_points_balls_color", high_points_balls_color);
+		sessionStorage.setItem("game_duration", game_duration);
+		sessionStorage.setItem("n_monsters", n_monsters);
+		
+		//save settings in local storage
+		var key_up = sessionStorage.getItem("key_up");
+		var key_down =sessionStorage.getItem("key_down");
+		var key_left =sessionStorage.getItem("key_left");
+		var key_right =sessionStorage.getItem("key_right");
 
 
-	 var details = [balls_amount, low_points_balls_color, medium_points_balls_color, high_points_balls_color, game_duration, n_monsters, key_up, key_down, key_left, key_right];
-		 //var user_name = sessionStorage.getItem("signup_user_name").value;
-		 localStorage.setItem(current_user_name+"_settings", JSON.stringify(details));	
-		 sessionStorage.setItem("user_name", current_user_name);	
+		var details = [balls_amount, low_points_balls_color, medium_points_balls_color, high_points_balls_color, game_duration, n_monsters, key_up, key_down, key_left, key_right];
+			//var user_name = sessionStorage.getItem("signup_user_name").value;
+		localStorage.setItem(current_user_name+"_settings", JSON.stringify(details));	
+		sessionStorage.setItem("user_name", current_user_name);	
+		$("#game_button").attr("disabled", false);
+	 }
  }
  function randomSettings(){
 	document.getElementById("balls_amount").innerHTML = 60;
@@ -145,6 +168,11 @@ function showOnlySettings() {
 	sessionStorage.setItem("key_down", 40);
 	sessionStorage.setItem("key_left", 37);
 	sessionStorage.setItem("key_right", 39);
+
+	key_down_set = true;
+	key_left_set = true;
+	key_up_set = true;
+	key_right_set = true;
  }
  function displaySettings(){
 	alert("balls amount: "+ sessionStorage.getItem("balls_amount") + "\n" +
