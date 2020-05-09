@@ -163,10 +163,15 @@
     background-color: rgb(215, 229, 182);
     color: rgb(5, 68, 5); 
 }
-.settings_button:hover {
+.settings_button:hover:enabled {
     background-color: rgb(244, 247, 239);  
 }
 
+.settings_button:disabled ,
+    settings_button[disabled]{
+    border: 2px solid rgb(66, 90, 66);
+    color: rgb(66, 90, 66); 
+}
 #game{
     color: rgb(215, 229, 182) ;
 }
