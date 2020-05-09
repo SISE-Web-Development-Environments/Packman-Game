@@ -168,6 +168,11 @@ function showOnlySettings() {
 	sessionStorage.setItem("key_down", 40);
 	sessionStorage.setItem("key_left", 37);
 	sessionStorage.setItem("key_right", 39);
+
+	key_down_set = true;
+	key_left_set = true;
+	key_up_set = true;
+	key_right_set = true;
  }
  function displaySettings(){
 	alert("balls amount: "+ sessionStorage.getItem("balls_amount") + "\n" +
